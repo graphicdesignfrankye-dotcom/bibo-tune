@@ -1,0 +1,63 @@
+:root {
+  --color-bg: #0E1A22;
+  --color-bg-deep: #08121A;
+  --color-surface: #162832;
+  --color-surface-raised: #1F3744;
+  --color-border: #2E4B5B;
+  --color-border-input: #7FA3B5;
+  --color-text: #F1FAFA;
+  --color-text-muted: #A9C5CF;
+  --color-accent: #2DD4BF;
+  --color-accent-strong: #0F766E;
+  --color-accent-pink: #FF8A3D;
+  --color-accent-cyan: #67E8F9;
+  --color-on-accent: #FFFFFF;
+  --color-danger: #FF7A85;
+  --color-success: #4ADE80;
+  --color-warning: #FBBF24;
+
+  --grad-app: linear-gradient(135deg, #12303A 0%, #0E1A22 55%, #08121A 100%);
+  --grad-hero: linear-gradient(135deg, #0B7F73 0%, #C2410C 100%);
+  --grad-title: linear-gradient(135deg, #2DD4BF 0%, #FF8A3D 100%); /* testo del titolo: colori chiari per leggersi sul fondo scuro */
+  --grad-scan: linear-gradient(135deg, #67E8F9 0%, #0D9488 100%);
+  --grad-clean: linear-gradient(135deg, #FF8A3D 0%, #FFC46B 100%);
+  --grad-speed: linear-gradient(135deg, #86EFAC 0%, #2DD4BF 100%);
+
+  --font-sans: system-ui, -apple-system, 'Segoe UI Variable', 'Segoe UI', sans-serif;
+  --font-display: var(--font-sans);
+  --font-mono: 'JetBrains Mono', ui-monospace, Consolas, monospace;
+
+  --text-xs: 12px/16px var(--font-sans);
+  --text-sm: 15px/23px var(--font-sans);
+  --text-base: 16px/24px var(--font-sans);
+  --text-lg: 20px/28px var(--font-display);
+  --text-xl: 28px/34px var(--font-display);
+  --text-display: 44px/48px var(--font-display);
+
+  --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px;
+  --space-5: 24px; --space-6: 32px; --space-7: 48px; --space-8: 64px;
+
+  --radius-sm: 8px; --radius-md: 14px; --radius-lg: 22px; --radius-xl: 32px; --radius-pill: 999px;
+
+  --shadow-card: 0 8px 24px rgba(2,10,16,.40), inset 0 1px 0 rgba(255,255,255,.06);
+  --shadow-pop: 0 24px 60px rgba(2,10,16,.60);
+  --shadow-glow: 0 0 40px rgba(45,212,191,.40);
+  --glow-a: rgba(255,138,61,.28); --glow-b: rgba(45,212,191,.22); --scrim: rgba(2,10,16,.6);
+  --bar-bg: #0E1A22; --bar-fg: #F1FAFA; /* barra del titolo di Windows */
+  --ink: #08121A; --bibo-leg: #14B8A6; --bibo-bulb: #FF8A3D; --bibo-eye: #67E8F9; --bibo-arm: #CDEBE6; --bibo-visor-a: #1F3744; --bibo-visor-b: #08121A; --bibo-ant: #A9C5CF;
+  --chart-a: #14B8A6; --chart-b: #67E8F9; --chart-hot-a: #FF8A3D; --chart-hot-b: #FFC46B;
+
+  --glass-bg: rgba(255,255,255,.06);
+  --glass-border: rgba(255,255,255,.10);
+  --glass-blur: 24px;
+
+  --sidebar-w: 76px; --header-h: 56px; --content-max: 1040px;
+
+  --motion-fast: 120ms; --motion-base: 220ms; --motion-slow: 600ms;
+  --ease: cubic-bezier(.2,.8,.2,1);
+  --ease-spring: cubic-bezier(.34,1.56,.64,1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root { --motion-fast: 0ms; --motion-base: 0ms; --motion-slow: 0ms; }
+}

@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Bibo Tune — design system</title>
+<style>:root {
+  --color-bg: #14112B;
+  --color-bg-deep: #0D0B1E;
+  --color-surface: #1F1B3F;
+  --color-surface-raised: #2A2552;
+  --color-border: #3A346B;
+  --color-border-input: #8C86C4;
+  --color-text: #F5F4FF;
+  --color-text-muted: #B4B0DA;
+  --color-accent: #7C6BFF;
+  --color-accent-strong: #5B49E6;
+  --color-accent-pink: #FF6FB5;
+  --color-accent-cyan: #3FD8FF;
+  --color-on-accent: #FFFFFF;
+  --color-danger: #FF7A85;
+  --color-success: #4BE3A0;
+  --color-warning: #FFC857;
+
+  --grad-app: linear-gradient(135deg, #1B1545 0%, #14112B 55%, #0D0B1E 100%);
+  --grad-hero: linear-gradient(135deg, #7C6BFF 0%, #FF6FB5 100%);
+  --grad-scan: linear-gradient(135deg, #3FD8FF 0%, #7C6BFF 100%);
+  --grad-clean: linear-gradient(135deg, #FF6FB5 0%, #FF9A62 100%);
+  --grad-speed: linear-gradient(135deg, #4BE3A0 0%, #3FD8FF 100%);
+
+  --font-sans: Inter, system-ui, 'Segoe UI Variable', 'Segoe UI', sans-serif;
+  --font-display: 'Plus Jakarta Sans', Inter, system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, Consolas, monospace;
+
+  --text-xs: 12px/16px var(--font-sans);
+  --text-sm: 14px/20px var(--font-sans);
+  --text-base: 16px/24px var(--font-sans);
+  --text-lg: 20px/28px var(--font-display);
+  --text-xl: 28px/34px var(--font-display);
+  --text-display: 44px/48px var(--font-display);
+
+  --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px;
+  --space-5: 24px; --space-6: 32px; --space-7: 48px; --space-8: 64px;
+
+  --radius-sm: 8px; --radius-md: 14px; --radius-lg: 22px; --radius-xl: 32px; --radius-pill: 999px;
+
+  --shadow-card: 0 8px 24px rgba(5,3,20,.35), inset 0 1px 0 rgba(255,255,255,.06);
+  --shadow-pop: 0 24px 60px rgba(5,3,20,.55);
+  --shadow-glow: 0 0 40px rgba(124,107,255,.45);
+
+  --glass-bg: rgba(255,255,255,.06);
+  --glass-border: rgba(255,255,255,.10);
+  --glass-blur: 24px;
+
+  --sidebar-w: 76px; --header-h: 56px; --content-max: 1040px;
+
+  --motion-fast: 120ms; --motion-base: 220ms; --motion-slow: 600ms;
+  --ease: cubic-bezier(.2,.8,.2,1);
+  --ease-spring: cubic-bezier(.34,1.56,.64,1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root { --motion-fast: 0ms; --motion-base: 0ms; --motion-slow: 0ms; }
+}
+</style>
+<style>
+*{box-sizing:border-box;margin:0}
+body{background:var(--color-bg-deep);color:var(--color-text);font:var(--text-base);min-height:100vh;display:grid;place-items:center;padding:24px}
+.app{position:relative;width:min(1100px,100%);height:720px;border-radius:var(--radius-xl);background:var(--grad-app);box-shadow:var(--shadow-pop);overflow:hidden;display:grid;grid-template-columns:var(--sidebar-w) 1fr;border:1px solid var(--glass-border)}
+.app::before{content:"";position:absolute;width:420px;height:420px;right:-80px;top:-100px;background:radial-gradient(closest-side,rgba(255,111,181,.35),transparent);filter:blur(10px);pointer-events:none}
+.app::after{content:"";position:absolute;width:380px;height:380px;left:60px;bottom:-140px;background:radial-gradient(closest-side,rgba(63,216,255,.22),transparent);pointer-events:none}
+nav{background:var(--glass-bg);backdrop-filter:blur(var(--glass-blur));border-right:1px solid var(--glass-border);display:flex;flex-direction:column;align-items:center;gap:var(--space-3);padding:var(--space-5) 0;z-index:2}
+nav button{all:unset;cursor:pointer;width:48px;height:48px;border-radius:var(--radius-md);display:grid;place-items:center;font-size:20px;color:var(--color-text-muted);transition:var(--motion-base) var(--ease)}
+nav button:hover{background:var(--glass-bg);color:var(--color-text)}
+nav button[aria-current=page]{background:var(--grad-hero);color:var(--color-on-accent);box-shadow:var(--shadow-glow)}
+nav button:focus-visible,.btn:focus-visible{outline:2px solid var(--color-accent-cyan);outline-offset:3px}
+main{position:relative;z-index:1;padding:var(--space-6) var(--space-7);display:flex;flex-direction:column;gap:var(--space-5)}
+h1{font:var(--text-display);font-weight:800;letter-spacing:-.02em}
+h1 span{background:var(--grad-hero);-webkit-background-clip:text;background-clip:text;color:transparent}
+.sub{color:var(--color-text-muted);font:var(--text-base);max-width:46ch}
+.hero{display:flex;gap:var(--space-5);align-items:center}
+.actions{display:flex;gap:var(--space-3);align-items:center}
+.btn{all:unset;cursor:pointer;display:inline-flex;align-items:center;gap:8px;height:48px;padding:0 28px;border-radius:var(--radius-pill);font:600 15px var(--font-sans);transition:transform var(--motion-base) var(--ease-spring),box-shadow var(--motion-base)}
+.btn.primary{background:var(--color-accent-strong);color:var(--color-on-accent);background-image:var(--grad-hero);box-shadow:var(--shadow-glow)}
+.btn.primary:hover{transform:translateY(-2px) scale(1.03)}
+.btn.primary:active{transform:scale(.97)}
+.btn.ghost{background:var(--glass-bg);border:1px solid var(--glass-border);color:var(--color-text)}
+.btn.ghost:hover{background:var(--color-surface-raised)}
+.btn[disabled]{opacity:.45;cursor:not-allowed}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-4)}
+.card{background:var(--glass-bg);border:1px solid var(--glass-border);backdrop-filter:blur(var(--glass-blur));border-radius:var(--radius-lg);padding:var(--space-5);box-shadow:var(--shadow-card);display:flex;flex-direction:column;gap:var(--space-2);transition:transform var(--motion-base) var(--ease)}
+.card:hover{transform:translateY(-4px)}
+.ico{width:44px;height:44px;border-radius:var(--radius-md);display:grid;place-items:center;font-size:22px;margin-bottom:var(--space-2)}
+.card h3{font:var(--text-lg);font-weight:700}
+.card p{color:var(--color-text-muted);font:var(--text-sm)}
+.meter{height:8px;border-radius:99px;background:var(--color-surface-raised);overflow:hidden;margin-top:var(--space-2)}
+.meter i{display:block;height:100%;border-radius:99px;width:var(--v)}
+.chips{display:flex;gap:var(--space-2)}
+.chip{padding:4px 12px;border-radius:99px;font:var(--text-xs);font-weight:600;background:var(--glass-bg);border:1px solid var(--glass-border)}
+.ok{color:var(--color-success)}.warn{color:var(--color-warning)}.bad{color:var(--color-danger)}
+
+/* ---------- Mascotte: Bibo ---------- */
+#bibo{position:absolute;z-index:5;width:96px;height:112px;left:0;top:0;pointer-events:auto;cursor:pointer;
+  transition:transform 1.8s var(--ease);will-change:transform;filter:drop-shadow(0 12px 18px rgba(5,3,20,.5))}
+#bibo .bob{animation:bob 2.4s ease-in-out infinite}
+#bibo .eye{transform-origin:center;transform-box:fill-box;animation:blink 5s infinite}
+#bibo .ant{transform-origin:48px 20px;animation:sway 3s ease-in-out infinite}
+#bibo .bulb{animation:pulse 1.4s ease-in-out infinite}
+#bibo .armL,#bibo .armR{transform-box:fill-box;transform-origin:50% 0;transition:transform .3s var(--ease-spring)}
+#bibo .legL,#bibo .legR{transform-box:fill-box;transform-origin:50% 0}
+#bibo.walking .legL{animation:step .45s ease-in-out infinite}
+#bibo.walking .legR{animation:step .45s ease-in-out infinite reverse}
+#bibo.walking .bob{animation-duration:.45s}
+#bibo.scanning .armR{animation:wave .5s ease-in-out infinite}
+#bibo.scanning .visor-glow{animation:scan .9s linear infinite}
+#bibo.happy .bob{animation:hop .6s var(--ease-spring) 3}
+#bibo.happy .eye-ok{display:block}
+#bibo .eye-ok{display:none}
+#bibo.happy .eye{display:none}
+#shadow{position:absolute;z-index:4;width:70px;height:14px;border-radius:50%;background:rgba(0,0,0,.35);filter:blur(4px);transition:transform 1.8s var(--ease);left:0;top:0}
+#bubble{position:absolute;z-index:6;background:var(--color-text);color:var(--color-bg);font:600 13px var(--font-sans);padding:8px 12px;border-radius:14px 14px 14px 4px;max-width:200px;opacity:0;transition:opacity .25s,transform 1.8s var(--ease);pointer-events:none}
+#bubble.on{opacity:1}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+@keyframes hop{0%,100%{transform:translateY(0)}50%{transform:translateY(-24px)}}
+@keyframes blink{0%,94%,100%{transform:scaleY(1)}97%{transform:scaleY(.1)}}
+@keyframes sway{0%,100%{transform:rotate(-8deg)}50%{transform:rotate(8deg)}}
+@keyframes pulse{0%,100%{opacity:.5}50%{opacity:1}}
+@keyframes step{0%,100%{transform:rotate(-18deg)}50%{transform:rotate(18deg)}}
+@keyframes wave{0%,100%{transform:rotate(-25deg)}50%{transform:rotate(35deg)}}
+@keyframes scan{from{transform:translateX(-22px)}to{transform:translateX(22px)}}
+@media (prefers-reduced-motion:reduce){#bibo *{animation:none!important}#bibo,#shadow,#bubble{transition:none}}
+</style>
+</head>
+<body>
+<div class="app" id="app">
+  <nav aria-label="Principale">
+    <button aria-current="page" aria-label="Panoramica">⌂</button>
+    <button aria-label="Pulizia">✦</button>
+    <button aria-label="Velocità">⚡</button>
+    <button aria-label="Protezione">⛨</button>
+    <button aria-label="Programmi">▦</button>
+  </nav>
+  <main>
+    <div class="chips"><span class="chip ok">● PC in buona salute</span><span class="chip">Ultimo controllo: oggi</span></div>
+    <h1>Metti a punto<br>il tuo PC con <span>Bibo</span></h1>
+    <p class="sub">Bibo controlla, pulisce e velocizza il tuo computer. Tu premi un solo pulsante.</p>
+    <div class="actions">
+      <button class="btn primary" id="scanBtn">Avvia messa a punto</button>
+      <button class="btn ghost">Vedi dettagli</button>
+      <button class="btn ghost" disabled>Disabilitato</button>
+    </div>
+    <div class="cards">
+      <div class="card"><div class="ico" style="background:var(--grad-clean)">✦</div><h3>Pulizia</h3><p>18,4 GB di file inutili</p><div class="meter"><i style="--v:62%;background:var(--grad-clean)"></i></div></div>
+      <div class="card"><div class="ico" style="background:var(--grad-speed)">⚡</div><h3>Velocità</h3><p>7 programmi rallentano l'avvio</p><div class="meter"><i style="--v:38%;background:var(--grad-speed)"></i></div></div>
+      <div class="card"><div class="ico" style="background:var(--grad-scan)">⛨</div><h3>Protezione</h3><p>Nessuna minaccia trovata</p><div class="meter"><i style="--v:100%;background:var(--grad-scan)"></i></div></div>
+    </div>
+  </main>
+
+  <div id="shadow"></div>
+  <div id="bubble"></div>
+  <div id="bibo" role="img" aria-label="Bibo, la mascotte robot di Bibo Tune">
+    <svg viewBox="0 0 96 112" width="96" height="112">
+      <defs>
+        <linearGradient id="body" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#C9C3FF"/></linearGradient>
+        <linearGradient id="visor" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2A2552"/><stop offset="1" stop-color="#0D0B1E"/></linearGradient>
+        <clipPath id="vclip"><rect x="20" y="30" width="56" height="34" rx="17"/></clipPath>
+      </defs>
+      <g class="bob">
+        <g class="ant"><rect x="46" y="6" width="4" height="16" rx="2" fill="#B4B0DA"/><circle class="bulb" cx="48" cy="6" r="5" fill="#FF6FB5"/></g>
+        <g class="legL"><rect x="32" y="84" width="12" height="20" rx="6" fill="#7C6BFF"/></g>
+        <g class="legR"><rect x="52" y="84" width="12" height="20" rx="6" fill="#7C6BFF"/></g>
+        <g class="armL"><rect x="9" y="66" width="10" height="20" rx="5" fill="#C9C3FF"/></g>
+        <g class="armR"><rect x="77" y="66" width="10" height="20" rx="5" fill="#C9C3FF"/></g>
+        <rect x="27" y="62" width="42" height="30" rx="14" fill="url(#body)"/>
+        <circle cx="48" cy="77" r="5" fill="#7C6BFF"/><circle cx="48" cy="77" r="2" fill="#3FD8FF"/>
+        <rect x="12" y="20" width="72" height="52" rx="26" fill="url(#body)"/>
+        <rect x="20" y="30" width="56" height="34" rx="17" fill="url(#visor)"/>
+        <g clip-path="url(#vclip)"><rect class="visor-glow" x="44" y="30" width="8" height="34" fill="#3FD8FF" opacity=".0"/></g>
+        <g class="eyes">
+          <ellipse class="eye" cx="38" cy="47" rx="6" ry="8" fill="#3FD8FF"/>
+          <ellipse class="eye" cx="58" cy="47" rx="6" ry="8" fill="#3FD8FF"/>
+          <path class="eye-ok" d="M31 49 Q38 40 45 49" stroke="#4BE3A0" stroke-width="4" fill="none" stroke-linecap="round"/>
+          <path class="eye-ok" d="M51 49 Q58 40 65 49" stroke="#4BE3A0" stroke-width="4" fill="none" stroke-linecap="round"/>
+        </g>
+        <circle cx="26" cy="56" r="3.5" fill="#FF6FB5" opacity=".6"/><circle cx="70" cy="56" r="3.5" fill="#FF6FB5" opacity=".6"/>
+      </g>
+    </svg>
+  </div>
+</div>
+
+<script>
+const app=document.getElementById('app'),bibo=document.getElementById('bibo'),
+  sh=document.getElementById('shadow'),bub=document.getElementById('bubble'),btn=document.getElementById('scanBtn');
+const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+let x=140,y=520,busy=false;
+function place(nx,ny,say){
+  const W=app.clientWidth,H=app.clientHeight;
+  nx=Math.max(90,Math.min(W-110,nx));ny=Math.max(80,Math.min(H-130,ny));
+  bibo.classList.toggle('flip',nx<x);
+  bibo.classList.add('walking');
+  bibo.style.transform=`translate(${nx}px,${ny}px)`;
+  sh.style.transform=`translate(${nx+13}px,${ny+104}px)`;
+  bub.style.transform=`translate(${nx+70}px,${ny-18}px)`;
+  if(say){bub.textContent=say;bub.classList.add('on')}else bub.classList.remove('on');
+  x=nx;y=ny;
+  setTimeout(()=>bibo.classList.remove('walking'),reduce?0:1800);
+}
+const chatter=['Tutto sotto controllo!','Cerco file inutili…','Il PC respira meglio.','Premi il pulsante :)',null,null];
+function wander(){
+  if(busy)return;
+  place(120+Math.random()*(app.clientWidth-300),300+Math.random()*320,chatter[Math.floor(Math.random()*chatter.length)]);
+}
+btn.addEventListener('click',()=>{
+  if(busy)return;busy=true;btn.disabled=true;btn.textContent='Analisi in corso…';
+  bibo.classList.add('scanning');
+  place(app.clientWidth-300,360,'Scansione…');
+  setTimeout(()=>place(app.clientWidth/2,520,'Quasi fatto…'),2500);
+  setTimeout(()=>{
+    bibo.classList.remove('scanning');bibo.classList.add('happy');
+    place(app.clientWidth/2-40,430,'Fatto! +24% di velocità');
+    btn.textContent='Messa a punto completata';
+  },5000);
+  setTimeout(()=>{bibo.classList.remove('happy');busy=false;btn.disabled=false;btn.textContent='Avvia messa a punto'},8500);
+});
+bibo.addEventListener('click',()=>{bibo.classList.add('happy');bub.textContent='Ciao, sono Bibo!';bub.classList.add('on');setTimeout(()=>bibo.classList.remove('happy'),1900)});
+place(x,y,'Ciao, sono Bibo!');
+if(!reduce)setInterval(wander,4200);
+</script>
+<style>#bibo.flip svg{transform:scaleX(-1)}#bibo svg{transition:transform .2s}</style>
+</body>
+</html>

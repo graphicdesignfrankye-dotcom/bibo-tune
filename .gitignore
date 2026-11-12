@@ -1,0 +1,16 @@
+# Si rigenera o è troppo pesante per GitHub
+node_modules/
+dist/
+release/
+test-results/
+playwright-report/
+# installer 0.1.27 (123 MB, oltre il limite di 100 MB per file di GitHub): resta solo sul Mac
+Vecchia versione/
+# sistema
+.DS_Store
+*.log
+# Immagini e misure di confronto con un'altra app, e l'elenco dei nomi da evitare: restano solo sul Mac
+replica/screens/
+replica/diffs/
+replica/clone-screens/
+replica/brand.json

@@ -1,0 +1,26 @@
+feature,area,priority,original,clone,notes
+Scansione intelligente con un solo pulsante,panoramica,must,yes,yes,
+Anteprima di cosa viene eliminato prima di pulire,pulizia,must,yes,yes,con conferma
+Rimozione file inutili e cache di sistema,pulizia,must,yes,yes,provato su Windows 2026-11: la pulizia funziona
+Svuotare il cestino,pulizia,should,yes,yes,"provato su Windows 2026-11-09 (0.1.8): voce Cestino, conferma, Cestino vuoto"
+Gestione programmi all'avvio,velocità,must,yes,yes,"provato su Windows 2026-11-09 (0.1.4): elenco uguale a Gestione attività, app di Windows in sola lettura; impatto sull'avvio non mostrato"
+Disinstallare programmi,programmi,should,yes,yes,"provato su Windows 2026-11-10 (0.1.15-0.1.16): avvia il disinstallatore, verifica con 'Controllo…', elenca le cartelle rimaste e le sposta nel Cestino (20 MB di Everything, ritrovate nel Cestino); il registro non si tocca"
+Stato della protezione (firewall / antivirus / aggiornamenti),protezione,should,yes,yes,provato su Windows 2026-11-09
+Ricerca e rimozione malware,protezione,should,yes,yes,provato su Windows 2026-11-09: scansione rapida di Defender; la rimozione la fa Windows
+Cercare file grandi e vecchi,pulizia,should,yes,yes,"provato su Windows 2026-11: trovato, nel Cestino, ripristinato"
+Pulizia privacy del browser (cronologia / cookie),pulizia,should,yes,yes,"provato su Windows 2026-11-09 (0.1.11): cronologia e cookie di Chrome/Edge, rifiuta con browser aperto, segnalibri e accessi salvati restano; Firefox assente; dalla 0.1.12 spiega se il browser è attivo solo in background (non ancora provata); dalla 0.1.17 anche Firefox (solo cookie, mai segnalibri/password): Firefox (cookie) usato dall'utente: cookie cancellati"
+Liberare la memoria RAM,velocità,should,yes,yes,provato su Windows 2026-11-10 (0.1.13): 'Libera memoria' ha liberato 442 MB senza chiudere nulla (effetto temporaneo); la chiusura gentile dei programmi pesanti provata prima
+Monitor in background / icona nella barra,panoramica,should,yes,yes,"provato su Windows 2026-11: icona, tooltip, menu, la X nasconde la finestra; avviso RAM>=90% non provato; niente avvio con Windows"
+Trovare file duplicati,pulizia,could,yes,yes,"provato su Windows 2026-11: gruppo trovato, originale giusto, copia nel Cestino; il file con stesso peso ma diverso non compare"
+Visualizzare lo spazio su disco,panoramica,could,yes,yes,provato su Windows 2026-11-09: numeri uguali a Esplora file; nuova grafica a ciambelle e barre (0.1.10) vista e approvata su Windows
+Aggiornare i programmi installati,programmi,could,yes,yes,"provato su Windows 2026-11 (0.1.1, winget in italiano): solo ciò che winget conosce"
+Manutenzione programmata o promemoria,panoramica,could,yes,yes,"provato su Windows 2026-11-09: notifica arrivata, lastReminded scritto, un solo avviso al giorno; funziona solo con l'app attiva nella barra"
+Interfaccia in italiano,panoramica,could,yes,yes,
+Mascotte Bibo che guida l'utente,panoramica,could,no,yes,aggiunta: il tuo punto di distinzione
+Punto di ripristino prima di pulire,pulizia,could,no,yes,"provato su Windows 2026-11-10 (0.1.18, esito riferito dall'utente): casella nelle conferme di pulizia, Windows chiede il permesso"
+Chiudere i programmi aperti che bloccano la pulizia,pulizia,could,no,partial,"aggiunta nostra: popup 'Ci sono programmi aperti' in Pulizia, Panoramica e Privacy, provato su Windows dall'utente (0.1.19): funziona"
+Svuota il Cestino dentro Pulizia,pulizia,could,no,partial,"aggiunta nostra: dalla 0.1.35 il Cestino non è più una voce della barra laterale (tolta la schermata, come nell'app di riferimento): è un riquadro del riepilogo di Pulizia e una categoria nelle tre colonne, con Pulisci e conferma; svuota solo il Cestino; NON ancora provata su Windows"
+Impostazioni (tema),panoramica,could,no,partial,"aggiunta nostra (0.1.20): Tema Scuro/Chiaro (si ricorda, cambia anche la barra del titolo) e voce Palette per dopo; Impostazioni provata dall'utente (0.1.19), tema Chiaro NON ancora provato su Windows"
+"Palette e Informazioni (cinque palette, menu dell'icona)",panoramica,could,no,yes,"aggiunta nostra (0.1.22-0.1.23): provata su Windows dall'utente: palette, menu dell'icona con voce Impostazioni, pulsante Esci"
+Cancellare le voci di registro dopo la disinstallazione,programmi,could,no,yes,"aggiunta nostra (0.1.25-0.1.26): provata su Windows (altro PC): HKCU con copia .reg, HKLM come amministratore con richiesta di Windows; tornare indietro se si preme Ho finito troppo presto (0.1.27) funziona"
+"Pulizia a tre colonne (categorie, tipi di file, elementi con casella; barra in basso)",pulizia,could,no,yes,"aggiunta nostra (0.1.28): ispirata al dettaglio dell'app di riferimento; ogni elemento si pulisce da solo (es. solo la cache di Chrome); non ancora provata su Windows"
