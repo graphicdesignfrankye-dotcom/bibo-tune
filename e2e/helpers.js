@@ -21,12 +21,12 @@ exports.handleBlockers = async (page) => {
 
 /** Dopo aver aperto Pulizia, Velocità, Protezione o Programmi si vede il benvenuto: preme il tasto che avvia l'analisi. Le altre schermate non hanno benvenuto. */
 exports.begin = async (page, nav) => {
-  const label = { Pulizia: 'Scansiona', 'Velocità': 'Analizza', Protezione: 'Controlla', Programmi: 'Scansiona', 'Il mio disordine': 'Cerca', Privacy: 'Controlla', Aggiornamenti: 'Controlla', 'Lente spaziale': 'Analizza' }[nav];
+  const label = { Pulizia: 'Scansiona', 'Velocità': 'Analizza', Protezione: 'Controlla', Programmi: 'Scansiona', 'Caos': 'Cerca', Privacy: 'Controlla', Aggiornamenti: 'Controlla', 'Mappa del disco': 'Analizza' }[nav];
   if (label) await page.getByRole('button', { name: label, exact: true }).click();
 };
 
 /** Dal riepilogo di Pulizia o Velocità apre il dettaglio. */
 exports.detail = async (page, nav) => {
-  const label = { Pulizia: 'Controlla tutto', 'Velocità': 'Mostra tutto', Protezione: 'Mostra tutto', Programmi: 'Mostra tutto', 'Il mio disordine': 'Rivedi file grandi' }[nav];
+  const label = { Pulizia: 'Controlla tutto', 'Velocità': 'Mostra tutto', Protezione: 'Mostra tutto', Programmi: 'Mostra tutto', 'Caos': 'Rivedi file grandi' }[nav];
   if (label) await page.getByRole('button', { name: label, exact: true }).click();
 };

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Home, Sparkles, Zap, ShieldCheck, LayoutGrid, Folder, EyeOff, Search, Download, Settings as SettingsIcon } from 'lucide-react';
+import { Home, Sparkles, Zap, ShieldCheck, LayoutGrid, Folder, EyeOff, PieChart, Download, Settings as SettingsIcon } from 'lucide-react';
 import { BiboProvider } from './components/Bibo.jsx';
 import Overview from './screens/Overview.jsx';
 import { Clean, Speed, Protection, Programs, Disordine, Privacy, Disk, Updates, Info } from './screens/Others.jsx';
@@ -12,8 +12,8 @@ const NAV = [
   { id: 'privacy', label: 'Privacy', icon: EyeOff },
   { id: 'programmi', label: 'Programmi', icon: LayoutGrid },
   { id: 'aggiornamenti', label: 'Aggiornamenti', icon: Download },
-  { id: 'disordine', label: 'Il mio disordine', icon: Folder },
-  { id: 'spazio', label: 'Lente spaziale', icon: Search },
+  { id: 'disordine', label: 'Caos', icon: Folder },
+  { id: 'spazio', label: 'Mappa del disco', icon: PieChart },
   { id: 'info', label: 'Impostazioni', icon: SettingsIcon }, // apre Informazioni, dove stanno le impostazioni
 ];
 

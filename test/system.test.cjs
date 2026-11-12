@@ -243,7 +243,7 @@ test('ogni tipo di spazzatura ha i suoi elementi e le cartelle sono quelle dichi
   } finally { process.env.LOCALAPPDATA = old.l; process.env.SystemRoot = old.w; }
 });
 
-test('Lente spaziale: i percorsi delle cartelle sono validati e restano dentro le cartelle conosciute', async () => {
+test('Mappa del disco: i percorsi delle cartelle sono validati e restano dentro le cartelle conosciute', async () => {
   const s = require('../electron/system.cjs'); const check = s._internals.checkFolderPath; const path = require('path'); const os = require('os');
   assert.equal(check('Videos', []), path.join(os.homedir(), 'Videos'));
   assert.equal(check('Videos', ['Film', '2024']), path.join(os.homedir(), 'Videos', 'Film', '2024'));

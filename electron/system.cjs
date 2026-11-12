@@ -676,7 +676,7 @@ async function getDiskUsage() {
   return { drives, folders: folders.sort((a, b) => b.bytes - a.bytes) };
 }
 
-/** Cartelle di primo livello che Lente spaziale può aprire, con la loro posizione. */
+/** Cartelle di primo livello che Mappa del disco può aprire, con la loro posizione. */
 function diskRoots() {
   const h = os.homedir();
   return { Downloads: path.join(h, 'Downloads'), Documents: path.join(h, 'Documents'), Desktop: path.join(h, 'Desktop'), Videos: path.join(h, 'Videos'), Pictures: path.join(h, 'Pictures'), Music: path.join(h, 'Music'), 'Dati delle app': path.join(h, 'AppData', 'Local') };

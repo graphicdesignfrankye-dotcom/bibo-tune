@@ -146,7 +146,7 @@ test('Bibo: con "riduci animazioni" resta fermo', async ({ browser }) => {
 });
 
 test('S-File grandi: selezione, conferma, spostamento nel Cestino', async ({ page }) => {
-  const ok = guard(page); await page.goto('/'); await page.getByRole('button', { name: 'Il mio disordine', exact: true }).click(); await begin(page, 'Il mio disordine'); await detail(page, 'Il mio disordine');
+  const ok = guard(page); await page.goto('/'); await page.getByRole('button', { name: 'Caos', exact: true }).click(); await begin(page, 'Caos'); await detail(page, 'Caos');
   await expect(page.getByRole('heading', { name: 'File grandi', level: 1 })).toBeVisible();
   await expect(page.getByRole('button', { name: /^Sposta nel Cestino/ })).toBeDisabled();
   await page.getByRole('checkbox', { name: /backup-telefono/ }).check();
@@ -194,7 +194,7 @@ test('S-Protezione: scansione rapida con Defender', async ({ page }) => {
   expect(await axe(page)).toEqual([]); ok();
 });
 test('S-File grandi e Duplicati: un solo riepilogo a riquadri, Rivedi apre l\'elenco giusto e Indietro torna', async ({ page }) => {
-  const ok = guard(page); await page.goto('/'); await page.getByRole('button', { name: 'Il mio disordine', exact: true }).click(); await begin(page, 'Il mio disordine');
+  const ok = guard(page); await page.goto('/'); await page.getByRole('button', { name: 'Caos', exact: true }).click(); await begin(page, 'Caos');
   await expect(page.getByRole('heading', { name: /Hai \d+ file da esaminare/, level: 2 })).toBeVisible();
   await expect(page.getByRole('region', { name: 'Duplicati' })).toBeVisible(); await expect(page.getByRole('region', { name: 'File grandi' })).toBeVisible();
   await page.getByRole('button', { name: 'Rivedi file grandi' }).click(); await expect(page.getByRole('heading', { name: 'File grandi', level: 1 })).toBeVisible();
@@ -202,8 +202,8 @@ test('S-File grandi e Duplicati: un solo riepilogo a riquadri, Rivedi apre l\'el
   await page.getByRole('button', { name: 'Rivedi duplicati' }).click(); await expect(page.getByRole('heading', { name: 'Duplicati', level: 1 })).toBeVisible();
   await page.getByRole('button', { name: 'Indietro' }).click(); await expect(page.getByRole('region', { name: 'File grandi' })).toBeVisible(); ok();
 });
-test('S-Lente spaziale: cliccando una cartella (elenco o bolla) si apre il suo contenuto e si torna indietro', async ({ page }) => {
-  const ok = guard(page); await page.goto('/'); await page.getByRole('button', { name: 'Lente spaziale', exact: true }).click(); await begin(page, 'Lente spaziale');
+test('S-Mappa del disco: cliccando una cartella (elenco o bolla) si apre il suo contenuto e si torna indietro', async ({ page }) => {
+  const ok = guard(page); await page.goto('/'); await page.getByRole('button', { name: 'Mappa del disco', exact: true }).click(); await begin(page, 'Mappa del disco');
   await expect(page.getByRole('img', { name: /Mappa a bolle/ })).toBeVisible();
   await page.getByRole('button', { name: /^Apri Dati delle app/ }).click(); // dall'elenco
   await expect(page.getByRole('navigation', { name: 'Percorso' }).getByText('Dati delle app')).toBeVisible();
@@ -218,7 +218,7 @@ test('S-Lente spaziale: cliccando una cartella (elenco o bolla) si apre il suo c
   await page.getByRole('button', { name: 'Questo PC' }).click(); await expect(page.getByRole('button', { name: /^Apri Video/ })).toBeVisible(); ok();
 });
 test('S-Spazio: dischi e cartelle, sola lettura', async ({ page }) => {
-  const ok = guard(page); await page.goto('/'); await page.getByRole('button', { name: 'Lente spaziale', exact: true }).click(); await begin(page, 'Lente spaziale');
+  const ok = guard(page); await page.goto('/'); await page.getByRole('button', { name: 'Mappa del disco', exact: true }).click(); await begin(page, 'Mappa del disco');
   await expect(page.getByRole('heading', { name: 'Disco C:' })).toBeVisible();
   await expect(page.getByRole('group', { name: /Disco C: .* usati su .*, \d+%/ })).toBeVisible(); // ciambella con testo equivalente
   await expect(page.getByText('Quasi pieno')).toHaveCount(1); // solo E: è sopra il 90%
@@ -234,7 +234,7 @@ test('S-Aggiornamenti: aggiorna un programma', async ({ page }) => {
 });
 
 test('S-Duplicati: l\'originale non si può selezionare, le copie vanno nel Cestino con conferma', async ({ page }) => {
-  const ok = guard(page); await page.goto('/'); await page.getByRole('button', { name: 'Il mio disordine', exact: true }).click(); await begin(page, 'Il mio disordine'); await page.getByRole('button', { name: 'Rivedi duplicati' }).click();
+  const ok = guard(page); await page.goto('/'); await page.getByRole('button', { name: 'Caos', exact: true }).click(); await begin(page, 'Caos'); await page.getByRole('button', { name: 'Rivedi duplicati' }).click();
   await expect(page.getByText('Originale: resta qui')).toHaveCount(2);
   await expect(page.getByRole('checkbox')).toHaveCount(3); // 1 + 2 copie, mai gli originali
   expect(await axe(page)).toEqual([]);
@@ -258,7 +258,7 @@ test('S-Versione: due carte, la classica si seleziona e si applica, si apre l\'i
   // interfaccia classica: barra a sole icone, voci a parte, nessun benvenuto
   const nav = page.getByRole('navigation', { name: 'Principale' }); await expect(nav).toBeVisible();
   for (const n of ['Panoramica', 'Pulizia', 'File grandi', 'Duplicati', 'Cestino', 'Spazio']) await expect(nav.getByRole('button', { name: n, exact: true })).toBeVisible();
-  await expect(nav.getByRole('button', { name: 'Il mio disordine' })).toHaveCount(0);
+  await expect(nav.getByRole('button', { name: 'Caos' })).toHaveCount(0);
   await expect(page.getByRole('button', { name: 'Avvia messa a punto' })).toBeVisible(); // la Panoramica di allora
   await nav.getByRole('button', { name: 'Pulizia', exact: true }).click();
   await expect(page.getByRole('heading', { name: 'Pulizia', level: 1 })).toBeVisible();
@@ -375,13 +375,13 @@ test('S-Palette: ogni palette, scura e chiara, senza violazioni di contrasto WCA
     await page.addInitScript(([p, t]) => { localStorage.setItem('bibo-palette', p); localStorage.setItem('bibo-theme', t); }, [pal, th]);
     await page.goto('/#info'); await page.reload(); await expect(page.locator('html')).toHaveAttribute('data-palette', pal);
     expect(await axe(page), `Informazioni ${pal}/${th}`).toEqual([]);
-    for (const nav of ['Panoramica', 'Pulizia', 'Lente spaziale']) { await page.getByRole('button', { name: nav, exact: true }).click(); await page.waitForTimeout(900); expect(await axe(page), `${nav} ${pal}/${th}`).toEqual([]); }
+    for (const nav of ['Panoramica', 'Pulizia', 'Mappa del disco']) { await page.getByRole('button', { name: nav, exact: true }).click(); await page.waitForTimeout(900); expect(await axe(page), `${nav} ${pal}/${th}`).toEqual([]); }
   }
 });
 test('S-Tema chiaro: tutte le schermate senza violazioni di contrasto WCAG AA', async ({ page }) => {
   await page.addInitScript(() => localStorage.setItem('bibo-theme', 'light'));
   await page.goto('/'); await expect(page.locator('html')).toHaveAttribute('data-theme', 'light');
-  for (const nav of ['Panoramica', 'Pulizia', 'Il mio disordine', 'Velocità', 'Protezione', 'Privacy', 'Programmi', 'Aggiornamenti', 'Lente spaziale', 'Impostazioni']) {
+  for (const nav of ['Panoramica', 'Pulizia', 'Caos', 'Velocità', 'Protezione', 'Privacy', 'Programmi', 'Aggiornamenti', 'Mappa del disco', 'Impostazioni']) {
     await page.getByRole('button', { name: nav, exact: true }).click(); await page.waitForTimeout(900);
     expect(await axe(page), `contrasto nel tema chiaro: ${nav}`).toEqual([]);
     await begin(page, nav); await page.waitForTimeout(600); expect(await axe(page), `contrasto nel tema chiaro dopo l'avvio: ${nav}`).toEqual([]);

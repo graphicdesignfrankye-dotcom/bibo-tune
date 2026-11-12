@@ -2,7 +2,7 @@ const { test, expect } = require('@playwright/test');
 const { guard, axe, handleBlockers, begin, detail } = require('./helpers');
 test.use({ viewport: { width: 390, height: 844 } });
 
-for (const nav of ['Panoramica', 'Pulizia', 'Il mio disordine', 'Velocità', 'Protezione', 'Privacy', 'Programmi', 'Aggiornamenti', 'Lente spaziale', 'Impostazioni']) {
+for (const nav of ['Panoramica', 'Pulizia', 'Caos', 'Velocità', 'Protezione', 'Privacy', 'Programmi', 'Aggiornamenti', 'Mappa del disco', 'Impostazioni']) {
   test(`M-${nav}: a 390px niente scroll orizzontale e contenuto visibile`, async ({ page }) => {
     const ok = guard(page); await page.goto('/'); await page.getByRole('button', { name: nav, exact: true }).click();
     await page.waitForTimeout(700);

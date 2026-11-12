@@ -150,13 +150,13 @@ function Gate({ id, cfg, children }) {
 }
 
 const WELCOME2 = {
-  disordine: { Icon: Folder, title: 'Il mio disordine', text: 'Metti ordine tra i tuoi file: trova i più pesanti e le copie identiche. Vanno nel Cestino, quindi puoi sempre recuperarli.', action: 'Cerca',
+  disordine: { Icon: Folder, title: 'Caos', text: 'Metti ordine tra i tuoi file: trova i più pesanti e le copie identiche. Vanno nel Cestino, quindi puoi sempre recuperarli.', action: 'Cerca',
     feats: [[HardDrive, 'File grandi', 'I più pesanti nelle tue cartelle'], [Copy, 'Duplicati', 'Copie identiche: gli originali restano'], [Trash2, 'Nel Cestino', 'Niente si cancella per sempre']] },
   privacy: { Icon: EyeOff, title: 'Privacy', text: 'Cancella le tracce dei browser: cronologia e cookie. Segnalibri e password restano al loro posto.', action: 'Controlla',
     feats: [[Globe, 'Cronologia', 'Le pagine che hai visitato'], [Database, 'Cookie', 'Le tracce lasciate dai siti'], [ShieldCheck, 'Segnalibri e accessi', 'Non si toccano']] },
   updates: { Icon: Download, title: 'Aggiornamenti', text: 'Controlla se i programmi installati hanno una versione più nuova e aggiornali.', action: 'Controlla',
     feats: [[RefreshCw, 'Versioni nuove', 'Per i programmi installati'], [Package, 'Uno alla volta', 'Scegli cosa aggiornare'], [ShieldCheck, 'Più sicuri', 'Le correzioni arrivano con gli aggiornamenti']] },
-  disk: { Icon: PieChart, title: 'Lente spaziale', text: 'Vedi cosa occupa spazio sul disco, cartella per cartella, per capire da dove cominciare a liberarne.', action: 'Analizza',
+  disk: { Icon: PieChart, title: 'Mappa del disco', text: 'Vedi cosa occupa spazio sul disco, cartella per cartella, per capire da dove cominciare a liberarne.', action: 'Analizza',
     feats: [[PieChart, 'Mappa del disco', 'Quanto occupa ogni cartella'], [Folder, 'Cartelle grandi', 'Le più pesanti in cima'], [HardDrive, 'Spazio libero', 'Quanto ne resta']] },
 };
 export const Disk = () => <Gate cfg={WELCOME2.disk}><DiskInner /></Gate>;
@@ -323,7 +323,7 @@ function DiskInner() {
   const ready = d && (top || sub);
   const map = ready && items.length && sum > 0 ? packBubbles(items.filter((f) => f.bytes > 0)) : null;
   const open = (f) => { if (!f.leaf) setPath([...path, f.name]); setHover(null); };
-  return (<div className="screen"><h1 className="h1s">Lente spaziale</h1><p className="sub">Dove va lo spazio del tuo PC. Clicca una cartella per vedere cosa contiene. Solo lettura: qui non si elimina nulla.</p>
+  return (<div className="screen"><h1 className="h1s">Mappa del disco</h1><p className="sub">Dove va lo spazio del tuo PC. Clicca una cartella per vedere cosa contiene. Solo lettura: qui non si elimina nulla.</p>
     {!d ? <Rows /> : <>
       <nav className="crumbs" aria-label="Percorso"><button className="crumbback" aria-label="Indietro" disabled={top} onClick={() => setPath(path.slice(0, -1))}>‹</button>
         <button className="linkbtn" aria-current={top ? 'page' : undefined} onClick={() => setPath([])}>Questo PC</button>
@@ -352,7 +352,7 @@ function DisordineHub({ first }) {
   if (view !== 'summary') return (<><div className="backbar"><button className="linkbtn" onClick={() => setView('summary')}>Indietro</button></div>{view === 'large' ? <LargeFilesInner /> : <DuplicatesInner />}</>);
   const nLarge = (files || []).length, bLarge = (files || []).reduce((x, f) => x + f.bytes, 0);
   const copies = (groups || []).flatMap((g) => g.files.filter((f) => !f.keep).map(() => g.bytes)); const nDup = copies.length, bDup = copies.reduce((x, y) => x + y, 0);
-  return (<div className="screen"><h1 className="h1s">Il mio disordine</h1><p className="sub">I file che pesano di più e le copie identiche. Vanno nel Cestino, quindi puoi sempre recuperarli.</p>
+  return (<div className="screen"><h1 className="h1s">Caos</h1><p className="sub">I file che pesano di più e le copie identiche. Vanno nel Cestino, quindi puoi sempre recuperarli.</p>
     {!files || !groups ? <div role="status" aria-live="polite"><p className="sub">Cerco nelle tue cartelle…</p><Rows /></div> : <div className="summary">
       <h2 className="sumtitle">{nLarge + nDup ? `Hai ${nLarge + nDup} file da esaminare` : 'Niente da mettere in ordine'}</h2>
       <Button onClick={() => setView(first)}>Controlla tutti i file</Button>
@@ -546,7 +546,7 @@ export function Info() {
     <section aria-label="Versione" className="reminder tight"><h2 className="h2s">Versione</h2>
       <p className="sub">Scegli come appare l'app. I tuoi dati e le funzioni di pulizia sono gli stessi in entrambe.</p>
       <div role="radiogroup" aria-label="Versione" className="verchoice">
-        {[['recent', `Recente · ${uiv ? uiv.current : info ? info.version : '…'}`, "L'interfaccia di adesso.", ['Barra con i nomi accanto alle icone', 'Benvenuto e riepilogo a riquadri', 'Il mio disordine e Lente spaziale']],
+        {[['recent', `Recente · ${uiv ? uiv.current : info ? info.version : '…'}`, "L'interfaccia di adesso.", ['Barra con i nomi accanto alle icone', 'Benvenuto e riepilogo a riquadri', 'Caos e Mappa del disco']],
           ['classic', `Classica · ${uiv ? uiv.classic : '0.1.27'}`, "Com'era prima del rifacimento.", ['Barra a sole icone', 'Panoramica con le tre schede', 'Elenchi con le caselle, File grandi e Duplicati a parte']]].map(([id, title, sub, pts]) => (
           <button key={id} role="radio" aria-checked={pickV === id} className={'vopt' + (pickV === id ? ' on' : '')} disabled={id === 'classic' && !!uiv && !uiv.classicAvailable} onClick={() => setPickV(id)}>
             <b>{title}</b><small>{sub}</small>{pts.map((t) => <span className="vpt" key={t}>{t}</span>)}</button>))}

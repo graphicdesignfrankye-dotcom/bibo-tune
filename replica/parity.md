@@ -188,3 +188,8 @@ L'utente ha notato che, applicata la 0.1.27, non c'era modo di tornare indietro:
 Ora il ritorno sta dentro la finestra: `public/classic/return.js` (non fa parte della 0.1.27, lo dice il commento in testa) aggiunge un pulsante "‹ Versione recente" in alto a sinistra, nella zona libera. Nell'app chiede al processo principale `setUiVersion('recent')`; nel browser apre `../`. Nel browser vale anche Ctrl+Maiusc+V (non nell'app, dove lo gestisce già Electron: niente doppio cambio). Tre vie in tutto nell'app Windows: pulsante, menu dell'icona, scorciatoia.
 Test: 1 unit test (37 in tutto) e 2 e2e (63 in tutto): pulsante dalla classica e scorciatoia nel browser. Controllato a occhio a 1100 px: il pulsante non copre niente.
 Installer `Bibo Tune-0.1.41-win-x64.exe`: 63 e2e + 37 unit verdi, `return.js` dentro l'app. Non provato su Windows.
+
+### Nomi di sezione cambiati (0.1.42, 2026-11-12)
+Dopo la revisione del marchio (vedi `brand.md`) la barra laterale ha due nomi nuovi, tutti nostri: **"Caos"** (era "Il mio disordine", File grandi + Duplicati) e **"Mappa del disco"** (era "Lente spaziale", elenco di cartelle + mappa a bolle; l'icona passa dalla lente al grafico a torta). Il resto delle schermate non cambia. Le sezioni sopra, nel testo storico, usano ancora i nomi di allora. Barra attuale: Panoramica, Pulizia, Velocità, Protezione, Privacy, Programmi, Aggiornamenti, Caos, Mappa del disco, Impostazioni. I riferimenti usati per le misure di layout non sono nel repository.
+
+**Aggiornamento 0.1.43:** su richiesta dell'utente la voce "File e duplicati" è stata rinominata **"Caos"**; "Mappa del disco" resta. Barra attuale: Panoramica, Pulizia, Velocità, Protezione, Privacy, Programmi, Aggiornamenti, Caos, Mappa del disco, Impostazioni.

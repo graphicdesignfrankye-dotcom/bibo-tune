@@ -17,8 +17,8 @@ App per Windows che mette a punto il PC con l'aiuto del robot Bibo: toglie i fil
 | Privacy | Cronologia e cookie dei browser (non tocca segnalibri né password) |
 | Programmi | Disinstallazione, avanzi (cartelle e voci di registro, con copia `.reg` prima di cancellare) |
 | Aggiornamenti | Aggiornamento dei programmi tramite `winget` |
-| Il mio disordine | File grandi e duplicati, che vanno nel Cestino |
-| Lente spaziale | Elenco delle cartelle e mappa a bolle, con le cartelle apribili; solo lettura |
+| Caos | File grandi e duplicati, che vanno nel Cestino |
+| Mappa del disco | Elenco delle cartelle e mappa a bolle, con le cartelle apribili; solo lettura |
 | Impostazioni | Tema, cinque palette, barra delle applicazioni, promemoria, **Versione** |
 
 **Versione.** In Impostazioni si sceglie tra l'interfaccia *Recente* e quella *Classica 0.1.27* (la vecchia interfaccia, conservata in `public/classic/`). Il motore è lo stesso. Per tornare alla recente: pulsante "‹ Versione recente" nella finestra, voce nel menu dell'icona nella barra, oppure `Ctrl+Maiusc+V`.

@@ -166,7 +166,7 @@ export async function getDiskUsage() {
   return { drives: [{ letter: 'C:', total: 476 * GB, free: 118 * GB }, { letter: 'D:', total: 931 * GB, free: 640 * GB }, { letter: 'E:', total: 256 * GB, free: 14 * GB }],
     folders: [{ name: 'Dati delle app', bytes: 41 * GB }, { name: 'Videos', bytes: 22 * GB }, { name: 'Downloads', bytes: 14 * GB }, { name: 'Documents', bytes: 9 * GB }, { name: 'Pictures', bytes: 6 * GB }, { name: 'Music', bytes: 3 * GB }, { name: 'Desktop', bytes: 1 * GB }] };
 }
-/** Cartelle dentro una cartella di Lente spaziale. Nei dati finti le sottocartelle si inventano in modo stabile. */
+/** Cartelle dentro una cartella di Mappa del disco. Nei dati finti le sottocartelle si inventano in modo stabile. */
 const FAKE_SUB = { Videos: ['Film', 'Registrazioni schermo', 'Clip vacanze', 'Montaggi'], Downloads: ['Installer', 'Documenti scaricati', 'Immagini disco'], 'Dati delle app': ['Chrome', 'Discord', 'Spotify', 'Teams', 'Steam'], Documents: ['Lavoro', 'Fatture', 'Scuola'], Pictures: ['Foto 2024', 'Foto 2023', 'Schermate'], Music: ['Album', 'Playlist'], Desktop: ['Vecchi file'] };
 const FRACS = [.45, .28, .17, .1, .06];
 export async function getFolderChildren(top, segs) {
