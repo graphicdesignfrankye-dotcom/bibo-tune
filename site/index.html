@@ -42,7 +42,7 @@ h2{font-size:clamp(30px,4.4vw,46px);line-height:1.1;letter-spacing:-.02em;margin
 .ico{width:46px;height:46px;border-radius:14px;display:grid;place-items:center;font-size:22px;background:linear-gradient(135deg,rgba(45,212,191,.25),rgba(255,138,61,.25))}
 .dl{display:grid;grid-template-columns:1.2fr .8fr;gap:22px;margin-top:34px}.dl .card.big{background:linear-gradient(160deg,rgba(15,122,112,.35),rgba(22,40,50,.75))}
 .meta{display:flex;gap:8px 16px;flex-wrap:wrap;color:var(--color-text-muted);font-size:14px;margin:12px 0 20px;padding:0;list-style:none}
-.warn{border-left:3px solid var(--color-warning);padding:10px 14px;background:rgba(251,191,36,.08);border-radius:0 12px 12px 0;font-size:14px;color:#F3DDA0;margin-top:18px}
+.os{margin-top:22px}.oshead{display:flex;justify-content:space-between;align-items:center}.soon{font-size:12px;letter-spacing:.08em;text-transform:uppercase;font-weight:700;padding:4px 10px;border-radius:999px;background:rgba(255,138,61,.14);border:1px solid rgba(255,138,61,.4);color:#FFC9A3}.soonbtn{margin-top:18px;opacity:.6;cursor:not-allowed;border-style:dashed}.soonbtn:hover{filter:none}.sha{font-size:13px;color:var(--color-text-muted);margin:16px 0 0;word-break:break-all}.sha code{font:12px ui-monospace,Consolas,monospace;color:var(--color-text)}.warn{border-left:3px solid var(--color-warning);padding:10px 14px;background:rgba(251,191,36,.08);border-radius:0 12px 12px 0;font-size:14px;color:#F3DDA0;margin-top:18px}
 .steps{counter-reset:s;display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:34px;padding:0;list-style:none}.steps li{counter-increment:s;padding:26px;border-radius:22px;border:1px solid rgba(255,255,255,.1);background:rgba(22,40,50,.5)}
 .steps li::before{content:"0" counter(s);display:block;font-weight:800;font-size:34px;background:linear-gradient(135deg,#2DD4BF,#FF8A3D);-webkit-background-clip:text;background-clip:text;color:transparent}.steps b{display:block;margin:6px 0}.steps span{color:var(--color-text-muted)}
 details{border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:16px 20px;background:rgba(22,40,50,.45);margin-top:12px}summary{cursor:pointer;font-weight:700}details p{color:var(--color-text-muted);margin:10px 0 0}
@@ -81,11 +81,17 @@ footer{padding:44px 0 60px;border-top:1px solid rgba(255,255,255,.08);color:var(
  <div class="card"><div class="ico">🗂️</div><h3>Caos</h3><p>File grandi e doppioni, che vanno nel Cestino: puoi sempre recuperarli.</p></div>
  <div class="card"><div class="ico">🔒</div><h3>Privacy</h3><p>Cronologia e cookie dei browser, senza toccare segnalibri e password.</p></div></div></section>
 <section id="scarica" aria-labelledby="t-dl"><span class="eyebrow">Scarica</span><h2 id="t-dl">Un solo file, pronto in un minuto.</h2>
- <div class="dl"><div class="card big"><h3 style="margin-top:0;font-size:24px">Bibo Tune per Windows</h3>
+ <div class="dl"><div class="card big"><div class="ico" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 22 22" fill="#EFF9F8"><rect x="1" y="1" width="9" height="9" rx="1.2"/><rect x="12" y="1" width="9" height="9" rx="1.2"/><rect x="1" y="12" width="9" height="9" rx="1.2"/><rect x="12" y="12" width="9" height="9" rx="1.2"/></svg></div><h3 style="font-size:24px">Bibo Tune per Windows</h3>
   <ul class="meta"><li>Versione 0.1.58</li><li>Windows 10 / 11 · x64</li><li>Installer EXE · 118 MB</li></ul>
-  <a class="btn primary" href="#">⬇ Scarica per Windows</a>
-  <p class="warn"><b>Installer non firmato.</b> Al primo avvio Windows può mostrare un avviso (SmartScreen): premi «Maggiori informazioni» e poi «Esegui comunque». Puoi controllare il file con la somma SHA-256 pubblicata accanto al download.</p></div>
-  <div class="card"><h3 style="margin-top:0">Installata o portatile</h3><p>All'avvio dell'installer scegli: <b>Installata</b>, con collegamenti e disinstallazione da Windows, oppure <b>Portatile</b>, solo i file in una cartella (utile per una chiavetta).</p><p style="margin-top:12px">macOS e Linux: non previsti.</p></div></div>
+  <a class="btn primary" href="/download/windows" download>⬇ Scarica per Windows</a>
+  <p class="warn"><b>Installer non firmato.</b> Al primo avvio Windows può mostrare un avviso (SmartScreen): premi «Maggiori informazioni» e poi «Esegui comunque». Puoi controllare il file con la somma SHA-256 qui sotto.</p>
+  <p class="sha"><span>File: Bibo Tune-0.1.58-win-x64.exe</span><br><span>SHA-256:</span> <code>f6d5440df60fcf26add05ee672f6e73a4ce9e03ae1ba3d79393cfa0d4392f8e1</code></p></div>
+  <div class="card"><h3 style="margin-top:0">Installata o portatile</h3><p>All'avvio dell'installer scegli: <b>Installata</b>, con collegamenti e disinstallazione da Windows, oppure <b>Portatile</b>, solo i file in una cartella (utile per una chiavetta).</p></div></div>
+
+ <div class="grid two os">
+  <div class="card"><div class="ico" aria-hidden="true">🍎</div><h3>Bibo Tune per macOS</h3><p>Una versione per Mac è in programma. Ancora nessuna data.</p><span class="btn soonbtn" aria-disabled="true">Coming soon</span></div>
+  <div class="card"><div class="ico" aria-hidden="true">🐧</div><h3>Bibo Tune per Linux</h3><p>Una versione per Linux è in programma. Ancora nessuna data.</p><span class="btn soonbtn" aria-disabled="true">Coming soon</span></div>
+ </div>
  <ol class="steps"><li><b>Scarica l'installer</b><span>Un file solo, da avviare con un doppio clic.</span></li><li><b>Scegli come usarlo</b><span>Installata o portatile, poi la cartella che preferisci.</span></li><li><b>Fai il giro con Bibo</b><span>Mezzo minuto per vedere dove sta ogni cosa, poi premi Scansiona.</span></li></ol></section>
 <section id="aiuto" aria-labelledby="t-faq"><span class="eyebrow">Domande</span><h2 id="t-faq">Un po' di aiuto, quando serve.</h2>
  <details><summary>Bibo Tune manda dati da qualche parte?</summary><p>No. Tutto avviene sul tuo PC: l'app non invia nulla in rete e non chiede un account.</p></details>
