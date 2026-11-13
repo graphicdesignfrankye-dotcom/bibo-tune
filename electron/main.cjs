@@ -9,12 +9,56 @@ const prefsFile = () => path.join(app.getPath('userData'), 'prefs.json');
 const readPrefs = () => { try { return { keepInTray: true, ...JSON.parse(fs.readFileSync(prefsFile(), 'utf8')) }; } catch { return { keepInTray: true }; } };
 // L'icona di finestra, barra delle applicazioni e area di notifica segue il tema scelto in Impostazioni (chiaro o scuro).
 const themeNow = () => (readPrefs().theme === 'light' ? 'light' : 'dark');
+// Su Windows si usano file .ico con più misure, tenuti FUORI dall'archivio dell'app (cartella resources/icons):
+// Windows non sa leggere un .ico dentro l'archivio, e un PNG da 1024 px non è adatto alla barra delle applicazioni.
+const icoDir = () => (app.isPackaged ? path.join(process.resourcesPath, 'icons') : path.join(__dirname, '../assets-ico'));
 const asset = (n) => path.join(__dirname, '../assets', n);
-const iconFile = (t) => asset(t === 'light' ? 'icon-light.png' : 'icon.png');
-const trayFile = (t) => asset(t === 'light' ? 'tray-light.png' : 'tray.png');
+const iconFile = (t) => (process.platform === 'win32' ? path.join(icoDir(), t === 'light' ? 'icon-light.ico' : 'icon-dark.ico') : asset(t === 'light' ? 'icon-light.png' : 'icon.png'));
+const trayFile = (t) => (process.platform === 'win32' ? path.join(icoDir(), t === 'light' ? 'tray-light.ico' : 'tray-dark.ico') : asset(t === 'light' ? 'tray-light.png' : 'tray.png'));
+const iconLog = (m) => { try { fs.appendFileSync(path.join(app.getPath('userData'), 'icone.log'), `${new Date().toISOString()} ${m}\n`); } catch { /* solo diagnostica */ } };
+// L'icona dei collegamenti (desktop, menu Start, barra delle applicazioni se il programma è fissato) è scritta nel file .lnk:
+// Windows non la cambia da sola con il tema, quindi si riscrive qui. Si toccano solo i collegamenti che puntano a questo programma.
+function updateShortcuts(t) {
+  if (process.platform !== 'win32') return;
+  const icon = iconFile(t); const exe = process.execPath.toLowerCase(); const dirs = [];
+  const add = (...p) => { try { dirs.push(path.join(...p)); } catch { /* percorso mancante */ } };
+  add(app.getPath('desktop')); if (process.env.PUBLIC) add(process.env.PUBLIC, 'Desktop');
+  if (process.env.APPDATA) { add(process.env.APPDATA, 'Microsoft', 'Windows', 'Start Menu', 'Programs'); add(process.env.APPDATA, 'Microsoft', 'Internet Explorer', 'Quick Launch', 'User Pinned', 'TaskBar'); }
+  if (process.env.ProgramData) add(process.env.ProgramData, 'Microsoft', 'Windows', 'Start Menu', 'Programs');
+  let n = 0;
+  for (const d of dirs) {
+    let files = []; try { files = fs.readdirSync(d).filter((f) => f.toLowerCase().endsWith('.lnk')); } catch { continue; }
+    for (const f of files) {
+      const lnk = path.join(d, f);
+      try {
+        const cur = shell.readShortcutLink(lnk);
+        if (!cur.target || cur.target.toLowerCase() !== exe) continue;
+        if (cur.icon && cur.icon.toLowerCase() === icon.toLowerCase()) continue;
+        shell.writeShortcutLink(lnk, 'update', { icon, iconIndex: 0 }); n++; iconLog('collegamento aggiornato: ' + lnk);
+      } catch (e) { iconLog('collegamento non aggiornato (' + lnk + '): ' + e.message); }
+    }
+  }
+  if (n) { try { require('child_process').execFile('ie4uinit.exe', ['-show'], () => {}); } catch { /* aggiorna la memoria delle icone di Windows */ } }
+}
 function applyIcons(t) {
-  try { if (win && !win.isDestroyed()) win.setIcon(nativeImage.createFromPath(iconFile(t))); } catch { /* solo l'icona */ }
-  try { if (tray && !tray.isDestroyed()) { const img = nativeImage.createFromPath(trayFile(t)); if (!img.isEmpty()) tray.setImage(img); } } catch { /* solo l'icona */ }
+  updateShortcuts(t);
+  const wf = iconFile(t), tf = trayFile(t);
+  try {
+    if (win && !win.isDestroyed()) {
+      const img = nativeImage.createFromPath(wf); if (img.isEmpty()) throw new Error('file vuoto o mancante: ' + wf);
+      win.setIcon(img);
+      // la barra delle applicazioni, con un collegamento nel menu Start, prende l'icona da qui: va cambiata anche questa
+      if (process.platform === 'win32' && win.setAppDetails) win.setAppDetails({ appId: 'it.bibo.tune', appIconPath: wf, appIconIndex: 0 });
+    }
+    iconLog(`finestra ${t}: ${wf}`);
+  } catch (e) { iconLog('ERRORE icona finestra: ' + e.message); }
+  try {
+    if (tray && !tray.isDestroyed()) {
+      const img = nativeImage.createFromPath(tf); if (img.isEmpty()) throw new Error('file vuoto o mancante: ' + tf);
+      tray.setImage(img);
+    }
+    iconLog(`area di notifica ${t}: ${tf}`);
+  } catch (e) { iconLog('ERRORE icona area di notifica: ' + e.message); }
 }
 const writePrefs = (p) => { try { fs.writeFileSync(prefsFile(), JSON.stringify(p)); } catch { /* sola preferenza */ } };
 
@@ -172,6 +216,6 @@ function testNotification() {
 }
 // Windows mostra le notifiche solo se l'app ha un identificativo uguale a quello del collegamento creato dall'installer (appId in package.json).
 app.setAppUserModelId('it.bibo.tune');
-app.whenReady().then(() => { createWindow(); createTray(); setTimeout(checkReminder, 20000); setInterval(checkReminder, 3600000); });
+app.whenReady().then(() => { createWindow(); createTray(); applyIcons(themeNow()); setTimeout(checkReminder, 20000); setInterval(checkReminder, 3600000); });
 app.on('before-quit', () => { quitting = true; });
 app.on('window-all-closed', () => { if (quitting || !tray) app.quit(); });

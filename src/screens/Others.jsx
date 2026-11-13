@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Sparkles, Globe, FileText, Trash2, Archive, Layers, Zap, ShieldCheck, LayoutGrid, Power, Cpu, Gauge, Flame, Shield, RefreshCw, Package, Database, HardDrive, Copy, EyeOff, Download, PieChart, Folder } from 'lucide-react';
 import { Button, Card, Chip, Toggle, Skeleton, Empty, BackButton } from '../components/ui.jsx';
 import Modal from '../components/Modal.jsx';
+import { TOUR_EVENT } from '../components/Tour.jsx';
 import { useBibo } from '../components/Bibo.jsx';
 import { getTheme, applyTheme, PALETTES, getPalette, applyPalette } from '../theme.js';
 import { getUiVersion, setUiVersion, getFolderChildren, getJunk, cleanJunk, getStartupApps, setStartupEnabled, openStartupSettings, getProtection, getPrograms, removeProgram, getLargeFiles, trashLargeFiles, getDuplicates, trashDuplicates, getReminder, setReminder, getPrivacy, cleanPrivacy, getBlockers, terminateBrowsers, getMemoryApps, closeApp, freeMemory, createRestorePoint, RESTORE_TEXT, getLeftovers, trashLeftovers, deleteRegistry, protectionScan, getDiskUsage, getAppUpdates, updateApp, getAppInfo, setKeepInTray, testNotification, canQuit, quitApp, fmtBytes } from '../data/api.js';
@@ -570,6 +571,7 @@ export function Info() {
       <div className="row"><span className="grow">Resta nella barra quando chiudo la finestra<small>Così controlla CPU e RAM e manda i promemoria.</small></span><Toggle label="Resta nella barra quando chiudo la finestra" checked={keep} onChange={pickKeep} /></div>
       <div className="row"><span className="grow">Notifica di prova<small>Per controllare che Windows mostri le notifiche di Bibo Tune.</small></span><Button onClick={test}>Invia</Button></div>
       {note && <p className="sub" role="status">{note}</p>}</section>
+    <section aria-label="Giro guidato" className="reminder tight"><div className="row"><span className="grow">Giro guidato<small>Rivedi dove sta ogni cosa, in mezzo minuto.</small></span><Button onClick={() => window.dispatchEvent(new Event(TOUR_EVENT))}>Rivedi il giro</Button></div></section>
     <ReminderCard />
     {canQuit() && <section aria-label="Chiudi" className="reminder tight"><div className="row"><span className="grow">Esci da Bibo Tune<small>Chiude anche l'icona nella barra.</small></span><Button onClick={() => quitApp()}>Esci</Button></div></section>}
   </div>);

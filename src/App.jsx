@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Home, Sparkles, Zap, ShieldCheck, LayoutGrid, Folder, EyeOff, PieChart, Download, Settings as SettingsIcon } from 'lucide-react';
 import { BiboProvider } from './components/Bibo.jsx';
+import Tour from './components/Tour.jsx';
 import Overview from './screens/Overview.jsx';
 import { Clean, Speed, Protection, Programs, Disordine, Privacy, Disk, Updates, Info } from './screens/Others.jsx';
 
@@ -36,6 +37,7 @@ export default function App() {
           {navBtn(NAV.find((n) => n.id === 'info'))}
         </nav>
         <main key={page} tabIndex={0} aria-label="Contenuto"><View /></main>
+        <Tour />
       </div>
     </BiboProvider>
   );

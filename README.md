@@ -4,7 +4,7 @@ App per Windows che mette a punto il PC con l'aiuto del robot Bibo: toglie i fil
 
 È fatta con Electron e React. Su Windows lavora sul PC vero; su Mac e Linux, e nel browser, mostra dati di esempio, così si può sviluppare e provare l'interfaccia senza toccare niente.
 
-> **Stato:** versione 0.1.53, provata su Windows fino alla 0.1.27 e in parte oltre. L'installer non è firmato: al primo avvio Windows (SmartScreen, Smart App Control) può mostrare un avviso.
+> **Stato:** versione 0.1.58, provata su Windows fino alla 0.1.27 e in parte oltre. L'installer non è firmato: al primo avvio Windows (SmartScreen, Smart App Control) può mostrare un avviso.
 
 ## Cosa fa
 

@@ -1,6 +1,6 @@
 # Marchio Bibo Tune
 
-Logo, icone e immagine social. Il simbolo è il robot Bibo: testa tonda chiara, visiera scura con occhi azzurri, antenna con lampadina arancio, su fondo verde-acqua che sfuma nell'arancio.
+Logo, icone e immagine social. Il simbolo è la faccia di Bibo con contorno, senza fondo: testa tonda, visiera scura con occhi azzurri, antenna con lampadina arancio. Esiste in due versioni: per il tema scuro (icona scura: testa verde-acqua, contorno chiaro, `icon-dark.svg`) e per il tema chiaro (icona chiara: testa chiara, contorno verde-acqua, `icon-light.svg`). Le icone dell'app e del sito si rigenerano con `node scripts/make-icons.cjs`. I loghi con la scritta (`logo*.svg`) e l'immagine social usano ancora il vecchio simbolo su fondo verde-acqua e arancio.
 
 ## File
 
@@ -8,9 +8,10 @@ Logo, icone e immagine social. Il simbolo è il robot Bibo: testa tonda chiara, 
 |---|---|
 | `logo.svg` | Logo orizzontale (simbolo + scritta) per sfondi chiari |
 | `logo-on-dark.svg` | Lo stesso, con la scritta chiara, per sfondi scuri |
-| `logo-symbol.svg` | Solo il simbolo, con angoli arrotondati (sito, social, profilo) |
-| `app-icon-square.svg` | Simbolo a pieno quadrato, senza angoli arrotondati: per le icone degli store, che arrotondano da sole |
-| `favicon.svg` | Disegno semplificato per le dimensioni piccole (16–64 px) |
+| `icon-dark.svg`, `icon-light.svg` | Faccia di Bibo con contorno, senza fondo, per tema scuro e chiaro (sorgenti delle icone) |
+| `logo-symbol.svg` | Come `icon-dark.svg` (sito, social, profilo) |
+| `app-icon-square.svg` | Faccia su fondo blu scuro a pieno quadrato, senza trasparenza: per le icone degli store |
+| `favicon.svg` | Stessa faccia (tema scuro), per le dimensioni piccole (16–64 px) |
 | `favicon.ico` | Favicon per i browser più vecchi: 16, 32, 48 e 64 px |
 | `social-1200x630.svg` | Immagine per le anteprime sui social |
 | `png/` | Le stesse immagini già pronte in PNG (vedi sotto) |

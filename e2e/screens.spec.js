@@ -421,3 +421,34 @@ test('Tasto Indietro uguale ovunque: sopra il titolo, con Esc e Alt+Freccia sini
   }
   ok();
 });
+
+test.describe('Giro guidato al primo avvio', () => {
+  test.use({ storageState: { cookies: [], origins: [] } });
+  test('compare al primo avvio, si scorre con Avanti e con "Non visualizzare di nuovo" non torna più', async ({ page }) => {
+    const ok = guard(page); await page.goto('/');
+    const tour = page.getByRole('dialog', { name: 'Ciao, sono Bibo!' }); await expect(tour).toBeVisible();
+    await expect(tour.getByRole('checkbox', { name: 'Non visualizzare di nuovo' })).toBeChecked();
+    expect(await axe(page)).toEqual([]);
+    const inside = async () => { const d = await page.getByRole('dialog').boundingBox(); for (const b of await page.getByRole('dialog').getByRole('button').all()) { const r = await b.boundingBox(); expect(r.x).toBeGreaterThanOrEqual(d.x); expect(r.x + r.width).toBeLessThanOrEqual(d.x + d.width - 8); } };
+    await inside(); // i tasti stanno dentro il riquadro
+    await tour.getByRole('button', { name: 'Iniziamo' }).click(); await inside();
+    const t2 = page.getByRole('dialog', { name: 'Messa a punto' }); await expect(t2).toBeVisible(); await expect(t2.getByText('Passo 2 di 8')).toBeVisible();
+    await t2.getByRole('button', { name: 'Indietro' }).click(); await expect(page.getByRole('dialog', { name: 'Ciao, sono Bibo!' })).toBeVisible();
+    for (let n = 0; n < 7; n++) await page.getByRole('button', { name: /^(Iniziamo|Avanti)$/ }).click();
+    await expect(page.getByRole('dialog', { name: 'Impostazioni' })).toBeVisible();
+    await page.getByRole('button', { name: 'Inizia' }).click(); await expect(page.getByRole('dialog')).toHaveCount(0);
+    await page.reload(); await expect(page.getByRole('heading', { name: 'Messa a punto', level: 1 })).toBeVisible(); await expect(page.getByRole('dialog')).toHaveCount(0);
+    ok();
+  });
+  test('Salta con la casella tolta lo ripropone; si può rivedere da Impostazioni', async ({ page }) => {
+    const ok = guard(page); await page.goto('/');
+    const tour = page.getByRole('dialog', { name: 'Ciao, sono Bibo!' }); await tour.getByRole('checkbox', { name: 'Non visualizzare di nuovo' }).uncheck();
+    await tour.getByRole('button', { name: 'Salta' }).click(); await expect(page.getByRole('dialog')).toHaveCount(0);
+    await page.reload(); await expect(page.getByRole('dialog', { name: 'Ciao, sono Bibo!' })).toBeVisible();
+    await page.getByRole('button', { name: 'Salta' }).click(); // casella spuntata: non torna più
+    await page.reload(); await expect(page.getByRole('dialog')).toHaveCount(0);
+    await page.getByRole('button', { name: 'Impostazioni', exact: true }).click();
+    await page.getByRole('button', { name: 'Rivedi il giro' }).click(); await expect(page.getByRole('dialog', { name: 'Ciao, sono Bibo!' })).toBeVisible();
+    await page.keyboard.press('Escape'); await expect(page.getByRole('dialog')).toHaveCount(0); ok();
+  });
+});

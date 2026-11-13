@@ -227,3 +227,13 @@ Dopo la prova della 0.1.48 (domanda Installata/Portatile e bolle con i nomi: fun
 
 ### Release v0.1.53 su GitHub (2026-11-13)
 Pubblicata la release **v0.1.53** (tag sul commit `9a5a4a7`) con l'installer Windows allegato (`Bibo.Tune-0.1.53-win-x64.exe`, 124.123.048 byte, GitHub sostituisce gli spazi con punti) e le note delle novità dalla 0.1.44. Creata con `gh` (installato e autenticato dall'utente). Il repository resta **privato**: la release e il download sono visibili solo a chi ha accesso. L'installer non è firmato.
+
+### Versioni 0.1.54 – 0.1.58: icone, collegamenti che seguono il tema, icona B, giro guidato (2026-11-13/14)
+Prova dell'utente sulla 0.1.53: l'icona di barra delle applicazioni e area di notifica **non cambiava** con il tema. Cause e correzioni:
+- **0.1.54:** le icone diventano file `.ico` con più misure (`assets-ico/`, copiati in `resources\icons` con `extraResources`, fuori dall'archivio: Windows non legge un `.ico` dentro l'archivio) e la barra delle applicazioni riceve l'icona con `setAppDetails` (il programma ha un collegamento con lo stesso identificativo e Windows la prende da lì). Ogni cambio scrive `icone.log` in `%APPDATA%`.
+- **0.1.55:** l'icona sul desktop e nel menu Start è scritta nei collegamenti `.lnk`: a ogni cambio di tema l'app li riscrive (`updateShortcuts`, solo quelli che puntano a questo programma, anche la barra se fissato). Provata: la **barra delle applicazioni cambia**; il desktop restava com'era.
+- **0.1.56:** su richiesta dell'utente nuova icona: **proposta B** (faccia di Bibo con contorno, senza fondo; tre proposte in `brand/proposte/`). Tutte le icone si generano con `node scripts/make-icons.cjs` (assets, assets-ico, build/icon.ico, brand, public). Provata: cambia con il tema su desktop e barra, ma **chiaro e scuro erano invertiti**.
+- **0.1.57:** scambiate: con il tema scuro l'icona scura (testa verde-acqua, contorno chiaro), con il chiaro quella chiara. Aggiunto il **giro guidato al primo avvio**: 8 passi che illuminano le voci della barra, casella "Non visualizzare di nuovo" (già spuntata), "Salta", frecce da tastiera, "Rivedi il giro" in Impostazioni; si ricorda in `localStorage` (`bibo-tour`). Provato: icone e giro funzionano.
+- **0.1.58:** i tasti del giro sporgevano dal riquadro: riquadro più largo (380 px) e tasti che vanno a capo; test che controlla che stiano dentro.
+- **Test:** 67 e2e (con 3 nuovi sul giro) e 43 di sistema verdi alla 0.1.57; dopo, rieseguiti solo i test del giro.
+- **Da verificare:** l'utente segnala che sul PC di prova il giro non è partito all'ultima prova, forse perché quel PC l'aveva già visto (la memoria locale lo segna come fatto). Da provare su un altro PC, dove deve comparire al primo avvio.
