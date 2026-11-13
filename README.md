@@ -84,4 +84,5 @@ build/  assets/  icone
 ## Note
 
 - Le immagini di confronto usate durante lo sviluppo non fanno parte del repository.
-- Licenza: vedi [LICENSE](LICENSE). Tutti i diritti riservati.
+- Licenza: il codice è sotto licenza MIT, vedi [LICENSE](LICENSE). Il nome «Bibo Tune» e la grafica di Bibo restano riservati: vedi [TRADEMARK.md](TRADEMARK.md).
+- Gli installer si scaricano dalle [release](../../releases) o dal [sito](https://bibo-tune-site.vercel.app).

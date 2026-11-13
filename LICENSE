@@ -1,26 +1,26 @@
-Copyright (c) 2026 Francesco Argento. Tutti i diritti riservati.
-Copyright (c) 2026 Francesco Argento. All rights reserved.
+MIT License
 
-Questo software e il codice sorgente che lo accompagna sono di proprietà
-dell'autore. Non viene concessa alcuna licenza: senza autorizzazione scritta
-dell'autore non è consentito usare, copiare, modificare, unire, pubblicare,
-distribuire, sublicenziare o vendere il software, né parti di esso.
+Copyright (c) 2026 Francesco Argento
 
-This software and its source code are the property of the author. No licence
-is granted: without the author's written permission you may not use, copy,
-modify, merge, publish, distribute, sublicense or sell the software or any
-part of it.
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
 
-IL SOFTWARE È FORNITO "COSÌ COM'È", SENZA GARANZIE DI ALCUN TIPO, ESPRESSE O
-IMPLICITE, COMPRESE LE GARANZIE DI COMMERCIABILITÀ E DI IDONEITÀ A UNO SCOPO
-PARTICOLARE. L'AUTORE NON RISPONDE DI DANNI DERIVANTI DALL'USO DEL SOFTWARE.
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY AND
-FITNESS FOR A PARTICULAR PURPOSE. THE AUTHOR IS NOT LIABLE FOR ANY DAMAGES
-ARISING FROM THE USE OF THE SOFTWARE.
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
 
-Le librerie di terze parti incluse o usate da questo progetto (per esempio
-Electron, React e lucide-react) restano soggette alle loro licenze.
-Third-party libraries included or used by this project (for example Electron,
-React and lucide-react) remain subject to their own licences.
+---
+
+Il codice sorgente è sotto licenza MIT (testo sopra). La licenza NON concede
+diritti sul nome «Bibo Tune» e sul personaggio e logo di Bibo: vedi TRADEMARK.md.

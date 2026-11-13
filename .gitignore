@@ -14,3 +14,6 @@ replica/screens/
 replica/diffs/
 replica/clone-screens/
 replica/brand.json
+
+# Analisi del marchio: resta solo sul Mac
+replica/brand.md

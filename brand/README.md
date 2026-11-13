@@ -46,7 +46,7 @@ Il favicon è già collegato all'app (`index.html`, con copie in `public/`). L'i
 
 ## Stato del marchio
 
-Il nome non è registrato e i controlli fatti sono di screening, non un parere legale: vedi `replica/brand.md`, sezione "Controlli del 2026-11-12". Prima di spendere soldi sul nome serve un avvocato marchi.
+Il nome non è registrato come marchio. I controlli fatti sono solo di screening, non un parere legale: prima di spendere soldi sul nome serve un avvocato marchi. Vedi anche [TRADEMARK.md](../TRADEMARK.md).
 
 ## Come sono stati generati
 
