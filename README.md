@@ -4,7 +4,7 @@ App per Windows che mette a punto il PC con l'aiuto del robot Bibo: toglie i fil
 
 È fatta con Electron e React. Su Windows lavora sul PC vero; su Mac e Linux, e nel browser, mostra dati di esempio, così si può sviluppare e provare l'interfaccia senza toccare niente.
 
-> **Stato:** versione 0.1.48, provata su Windows fino alla 0.1.27 e in parte oltre. L'installer non è firmato: al primo avvio Windows (SmartScreen, Smart App Control) può mostrare un avviso.
+> **Stato:** versione 0.1.52, provata su Windows fino alla 0.1.27 e in parte oltre. L'installer non è firmato: al primo avvio Windows (SmartScreen, Smart App Control) può mostrare un avviso.
 
 ## Cosa fa
 
@@ -41,7 +41,7 @@ L'interfaccia classica, nel browser, sta a `http://localhost:5173/classic/index.
 ## Test
 
 ```bash
-npm test                         # test di sistema e della scelta di versione (node:test)
+npm test                         # test di sistema, della scelta di versione e dell installer (node:test)
 npx playwright install chromium  # solo la prima volta
 npm run test:e2e                 # test dell'interfaccia (Playwright), circa 3 minuti
 ```

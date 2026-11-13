@@ -10,6 +10,17 @@ exports.default = async function (ctx) {
   const groups = ResEdit.Resource.IconGroupEntry.fromEntries(res.entries);
   const id = groups.length ? groups[0].id : 1, lang = groups.length ? groups[0].lang : 1033;
   ResEdit.Resource.IconGroupEntry.replaceIconsForResource(res.entries, id, lang, ico.icons.map((i) => i.data));
+  // Nome e descrizione nelle proprietà del file, in Gestione attività e nelle app aperte: senza, Windows mostra "Electron".
+  const vis = ResEdit.Resource.VersionInfo.fromEntries(res.entries);
+  const vi = vis.length ? vis[0] : ResEdit.Resource.VersionInfo.createEmpty();
+  const vlang = vis.length && vi.lang ? vi.lang : 1033, cp = 1200, ver = ctx.packager.appInfo.version;
+  vi.setFileVersion(...ver.split('.').map(Number).concat([0]).slice(0, 4));
+  vi.setProductVersion(...ver.split('.').map(Number).concat([0]).slice(0, 4));
+  vi.setStringValues({ lang: vlang, codepage: cp }, {
+    FileDescription: 'Bibo Tune', ProductName: 'Bibo Tune', InternalName: 'Bibo Tune', OriginalFilename: 'Bibo Tune.exe',
+    CompanyName: 'Francesco Argento', LegalCopyright: 'Copyright © Francesco Argento', FileVersion: ver, ProductVersion: ver,
+  });
+  vi.outputToResourceEntries(res.entries);
   res.outputResource(exe);
   fs.writeFileSync(exePath, Buffer.from(exe.generate()));
   console.log('  • icona di Bibo inserita in', path.basename(exePath));

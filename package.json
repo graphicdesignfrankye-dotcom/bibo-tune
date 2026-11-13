@@ -1,7 +1,7 @@
 {
   "name": "bibo-tune",
   "productName": "Bibo Tune",
-  "version": "0.1.48",
+  "version": "0.1.52",
   "private": true,
   "main": "electron/main.cjs",
   "scripts": {
@@ -9,7 +9,7 @@
     "build": "vite build",
     "electron": "npm run build && electron .",
     "dist:win": "npm run build && electron-builder --win --x64",
-    "test": "node --test test/system.test.cjs test/ui-version.test.cjs",
+    "test": "node --test test/system.test.cjs test/ui-version.test.cjs test/installer.test.cjs",
     "test:e2e": "playwright test",
     "dist:mac": "npm run build && electron-builder --mac",
     "dist": "npm run build && electron-builder --mac --win --x64"
@@ -59,7 +59,8 @@
       "oneClick": false,
       "allowToChangeInstallationDirectory": true,
       "perMachine": false,
-      "include": "build/installer.nsh"
+      "include": "build/installer.nsh",
+      "uninstallDisplayName": "${productName}"
     },
     "artifactName": "${productName}-${version}-${os}-${arch}.${ext}",
     "afterPack": "build/afterPack.cjs"

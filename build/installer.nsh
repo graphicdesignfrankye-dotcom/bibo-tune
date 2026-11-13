@@ -18,6 +18,23 @@ Var PortableMode
 !macroend
 
 !macro customInstall
+  ; Chi ha installato una versione vecchia ha un collegamento chiamato "Electron" (e il nome ricordato nel registro):
+  ; si toglie, si scrive il nome giusto e si creano i collegamenti "Bibo Tune".
+  WriteRegStr SHELL_CONTEXT "${INSTALL_REGISTRY_KEY}" ShortcutName "Bibo Tune"
+  Delete "$SMPROGRAMS\Electron.lnk"
+  Delete "$APPDATA\Microsoft\Windows\Start Menu\Programs\Electron.lnk"
+  Delete "$DESKTOP\Electron.lnk"
+  ${If} $PortableMode != "1"
+    CreateShortCut "$SMPROGRAMS\Bibo Tune.lnk" "$INSTDIR\${APP_EXECUTABLE_FILENAME}" "" "$INSTDIR\${APP_EXECUTABLE_FILENAME}" 0 "" "" "${APP_DESCRIPTION}"
+    WinShell::SetLnkAUMI "$SMPROGRAMS\Bibo Tune.lnk" "${APP_ID}"
+    StrCpy $launchLink "$SMPROGRAMS\Bibo Tune.lnk"
+  ${EndIf}
+  ; Nome nel Pannello di controllo: solo "Bibo Tune" (la versione sta già nella colonna Versione).
+  WriteRegStr SHELL_CONTEXT "${UNINSTALL_REGISTRY_KEY}" DisplayName "Bibo Tune"
+  ; Windows ricorda il nome mostrato la prima volta che ha visto il programma (finora "Electron"):
+  ; si toglie dalla memoria, così alla prossima apertura legge quello nuovo.
+  DeleteRegValue HKCU "Software\Classes\Local Settings\Software\Microsoft\Windows\Shell\MuiCache" "$INSTDIR\${APP_EXECUTABLE_FILENAME}.FriendlyAppName"
+  DeleteRegValue HKCU "Software\Classes\Local Settings\Software\Microsoft\Windows\Shell\MuiCache" "$INSTDIR\${APP_EXECUTABLE_FILENAME}.ApplicationCompany"
   ${If} $PortableMode == "1"
     Delete "$newStartMenuLink"
     Delete "$newDesktopLink"
