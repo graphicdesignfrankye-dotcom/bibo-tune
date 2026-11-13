@@ -18,3 +18,10 @@ test('il nome nel Pannello di controllo è solo Bibo Tune', () => {
 test('le informazioni del file .exe dicono Bibo Tune', () => {
   for (const k of ['FileDescription', 'ProductName', 'InternalName']) assert.match(after, new RegExp(k + ": 'Bibo Tune'"));
 });
+
+test('le icone di finestra e area di notifica hanno la variante per il tema chiaro e il tema le usa', () => {
+  const root = path.join(__dirname, '..'); const main = fs.readFileSync(path.join(root, 'electron', 'main.cjs'), 'utf8');
+  for (const f of ['icon.png', 'icon-light.png', 'tray.png', 'tray-light.png']) assert.ok(fs.existsSync(path.join(root, 'assets', f)), f);
+  assert.match(main, /icon-light\.png/); assert.match(main, /tray-light\.png/);
+  assert.match(main, /'theme:set'[\s\S]*applyIcons\(t\)/);
+});

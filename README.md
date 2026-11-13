@@ -4,7 +4,7 @@ App per Windows che mette a punto il PC con l'aiuto del robot Bibo: toglie i fil
 
 È fatta con Electron e React. Su Windows lavora sul PC vero; su Mac e Linux, e nel browser, mostra dati di esempio, così si può sviluppare e provare l'interfaccia senza toccare niente.
 
-> **Stato:** versione 0.1.52, provata su Windows fino alla 0.1.27 e in parte oltre. L'installer non è firmato: al primo avvio Windows (SmartScreen, Smart App Control) può mostrare un avviso.
+> **Stato:** versione 0.1.53, provata su Windows fino alla 0.1.27 e in parte oltre. L'installer non è firmato: al primo avvio Windows (SmartScreen, Smart App Control) può mostrare un avviso.
 
 ## Cosa fa
 
@@ -19,7 +19,7 @@ App per Windows che mette a punto il PC con l'aiuto del robot Bibo: toglie i fil
 | Aggiornamenti | Aggiornamento dei programmi tramite `winget` |
 | Caos | File grandi e duplicati, che vanno nel Cestino |
 | Mappa del disco | Elenco delle cartelle e mappa a bolle, con le cartelle apribili; solo lettura |
-| Impostazioni | Tema, cinque palette, barra delle applicazioni, promemoria, **Versione** |
+| Impostazioni | Tema (anche l'icona di finestra e area di notifica cambia, chiara o scura), cinque palette, barra delle applicazioni, promemoria, **Versione** |
 
 **Versione.** In Impostazioni si sceglie tra l'interfaccia *Recente* e quella *Classica 0.1.27* (la vecchia interfaccia, conservata in `public/classic/`). Il motore è lo stesso. Per tornare alla recente: pulsante "‹ Versione recente" nella finestra, voce nel menu dell'icona nella barra, oppure `Ctrl+Maiusc+V`.
 

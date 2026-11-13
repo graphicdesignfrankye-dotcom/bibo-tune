@@ -7,6 +7,15 @@ const path = require('path');
 let win = null, tray = null, trayMenu = null, quitting = false, pendingNav = null, lastLoad = { cpu: 0, ram: 0 };
 const prefsFile = () => path.join(app.getPath('userData'), 'prefs.json');
 const readPrefs = () => { try { return { keepInTray: true, ...JSON.parse(fs.readFileSync(prefsFile(), 'utf8')) }; } catch { return { keepInTray: true }; } };
+// L'icona di finestra, barra delle applicazioni e area di notifica segue il tema scelto in Impostazioni (chiaro o scuro).
+const themeNow = () => (readPrefs().theme === 'light' ? 'light' : 'dark');
+const asset = (n) => path.join(__dirname, '../assets', n);
+const iconFile = (t) => asset(t === 'light' ? 'icon-light.png' : 'icon.png');
+const trayFile = (t) => asset(t === 'light' ? 'tray-light.png' : 'tray.png');
+function applyIcons(t) {
+  try { if (win && !win.isDestroyed()) win.setIcon(nativeImage.createFromPath(iconFile(t))); } catch { /* solo l'icona */ }
+  try { if (tray && !tray.isDestroyed()) { const img = nativeImage.createFromPath(trayFile(t)); if (!img.isEmpty()) tray.setImage(img); } } catch { /* solo l'icona */ }
+}
 const writePrefs = (p) => { try { fs.writeFileSync(prefsFile(), JSON.stringify(p)); } catch { /* sola preferenza */ } };
 
 // Interfaccia da mostrare: la recente o la classica 0.1.27 (copiata in dist/classic). La scelta si ricorda in prefs.json.
@@ -40,7 +49,7 @@ function openSection(id) {
 function createWindow() {
   win = new BrowserWindow({
     width: 1100, height: 720, minWidth: 360, minHeight: 480,
-    backgroundColor: '#08121A', title: 'Bibo Tune', icon: path.join(__dirname, '../assets/icon.png'),
+    backgroundColor: '#08121A', title: 'Bibo Tune', icon: iconFile(themeNow()),
     titleBarStyle: 'hidden',
     titleBarOverlay: { color: '#0E1A22', symbolColor: '#F1FAFA', height: 40 },
     webPreferences: { sandbox: true, preload: path.join(__dirname, 'preload.cjs'), contextIsolation: true, nodeIntegration: false },
@@ -53,7 +62,7 @@ function createWindow() {
 }
 
 function createTray() {
-  const img = nativeImage.createFromPath(path.join(__dirname, '../assets/tray.png'));
+  const img = nativeImage.createFromPath(trayFile(themeNow()));
   tray = new Tray(img.isEmpty() ? nativeImage.createEmpty() : img);
   const menu = (cpu, ram) => Menu.buildFromTemplate([
     { label: 'Apri Bibo Tune', click: showWindow },
@@ -95,6 +104,7 @@ const handlers = {
   'theme:set': (e, t, bar) => {
     if (t !== 'dark' && t !== 'light') throw new Error('Tema non valido.');
     const hex = /^#[0-9a-fA-F]{6}$/; const ok = bar && hex.test(bar.bg) && hex.test(bar.fg);
+    writePrefs({ ...readPrefs(), theme: t }); applyIcons(t);
     const w = BrowserWindow.fromWebContents(e.sender);
     if (w && process.platform === 'win32' && w.setTitleBarOverlay) w.setTitleBarOverlay(ok ? { color: bar.bg, symbolColor: bar.fg, height: 40 } : t === 'light' ? { color: '#DDF0EC', symbolColor: '#0B1F24', height: 40 } : { color: '#0E1A22', symbolColor: '#F1FAFA', height: 40 });
     return { theme: t };
