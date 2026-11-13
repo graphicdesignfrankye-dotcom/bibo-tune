@@ -23,3 +23,18 @@ export const Toggle = ({ checked, onChange, label, disabled }) => (
 
 export const Skeleton = ({ h = 20, w = '100%' }) => <div className="skeleton" style={{ height: h, width: w }} />;
 export const Empty = ({ title, text }) => <div className="empty"><h3>{title}</h3><p>{text}</p></div>;
+
+/* Tasto per tornare indietro, uguale in tutta l'app. Alt+← e Esc fanno lo stesso (se non c'è una finestra aperta o un campo in uso). */
+export function BackButton({ onClick, label = 'Indietro', disabled = false, keys = true }) {
+  const fn = React.useRef(onClick); fn.current = onClick;
+  React.useEffect(() => {
+    if (!keys || disabled) return undefined;
+    const h = (e) => {
+      const t = e.target; const typing = t && (t.isContentEditable || /^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName));
+      if (typing || e.defaultPrevented || document.querySelector('[role="dialog"]')) return;
+      if ((e.key === 'ArrowLeft' && e.altKey) || (e.key === 'Escape' && !e.altKey && !e.ctrlKey && !e.metaKey)) { e.preventDefault(); fn.current(); }
+    };
+    window.addEventListener('keydown', h); return () => window.removeEventListener('keydown', h);
+  }, [keys, disabled]);
+  return <button type="button" className="backpill" aria-label={label} title={`${label} (Esc)`} disabled={disabled} onClick={onClick}><span aria-hidden="true">‹</span> {label}</button>;
+}

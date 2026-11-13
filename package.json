@@ -1,7 +1,7 @@
 {
   "name": "bibo-tune",
   "productName": "Bibo Tune",
-  "version": "0.1.43",
+  "version": "0.1.48",
   "private": true,
   "main": "electron/main.cjs",
   "scripts": {
@@ -58,7 +58,8 @@
     "nsis": {
       "oneClick": false,
       "allowToChangeInstallationDirectory": true,
-      "perMachine": false
+      "perMachine": false,
+      "include": "build/installer.nsh"
     },
     "artifactName": "${productName}-${version}-${os}-${arch}.${ext}",
     "afterPack": "build/afterPack.cjs"

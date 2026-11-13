@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Sparkles, Globe, FileText, Trash2, Archive, Layers, Zap, ShieldCheck, LayoutGrid, Power, Cpu, Gauge, Flame, Shield, RefreshCw, Package, Database, HardDrive, Copy, EyeOff, Download, PieChart, Folder } from 'lucide-react';
-import { Button, Card, Chip, Toggle, Skeleton, Empty } from '../components/ui.jsx';
+import { Button, Card, Chip, Toggle, Skeleton, Empty, BackButton } from '../components/ui.jsx';
 import Modal from '../components/Modal.jsx';
 import { useBibo } from '../components/Bibo.jsx';
 import { getTheme, applyTheme, PALETTES, getPalette, applyPalette } from '../theme.js';
@@ -94,8 +94,8 @@ function CleanResults({ onBack }) {
   const total = (items || []).reduce((x, j) => x + j.bytes, 0);
   const review = (c) => { const t = c.types[0]; const k = cats.find((x) => x.types.some((y) => y.id === t.id)); if (k) setCatId(k.id); setTypeId(t.id); setView('detail'); };
   const cleanCard = (c) => { setOnly(Object.fromEntries(c.types.flatMap(leavesOf).map((l) => [l.key, true]))); setConfirm(true); };
-  const topLink = view === 'detail' ? <button className="linkbtn" onClick={() => setView('summary')}>Indietro</button> : <button className="linkbtn" onClick={onBack}>Ricomincia</button>;
-  return (<div className="screen clean"><h1 className="h1s">Pulizia</h1><p className="sub">File che puoi eliminare senza rischi per liberare spazio. Prima di eliminare ti faccio vedere l'elenco. {topLink}</p>
+  const topLink = view === 'detail' ? <BackButton onClick={() => setView('summary')} /> : <BackButton label="Ricomincia" onClick={onBack} keys={false} />;
+  return (<div className="screen clean"><div className="backbar">{topLink}</div><h1 className="h1s">Pulizia</h1><p className="sub">File che puoi eliminare senza rischi per liberare spazio. Prima di eliminare ti faccio vedere l'elenco.</p>
     {!items ? <div role="status" aria-live="polite"><p className="sub">Cerco i file inutili…</p><Rows /></div> : items.length === 0 ? <Empty title="Tutto pulito" text="Non c'è nulla da eliminare, bel lavoro." /> : view === 'summary' ? <div className="summary">
       <h2 className="sumtitle">Puoi liberare {fmtBytes(total)}</h2>{msg && <Chip tone="ok">{msg}</Chip>}
       <Button onClick={() => setView('detail')}>Controlla tutto</Button>
@@ -176,7 +176,7 @@ export const Programs = () => <Gate id="programmi" cfg={WELCOME.programs}><Progr
 function ProtectionHub() {
   const [view, setView] = useState('summary'); const [p, , err, load] = useLoad(getProtection);
   if (err) return <Err msg={err} retry={load} />;
-  if (view === 'detail') return (<><div className="backbar"><button className="linkbtn" onClick={() => setView('summary')}>Indietro</button></div><ProtectionInner /></>);
+  if (view === 'detail') return (<><div className="backbar"><BackButton onClick={() => setView('summary')} /></div><ProtectionInner /></>);
   const checks = p ? [p.firewall, p.antivirus, p.updates] : []; const bad = checks.filter((x) => !x).length;
   return (<div className="screen"><h1 className="h1s">Protezione</h1><p className="sub">Lo stato delle difese del tuo PC. La scansione la esegue Microsoft Defender, non Bibo.</p>
     {!p ? <div role="status" aria-live="polite"><p className="sub">Controllo le difese…</p><Rows /></div> : <div className="summary">
@@ -197,7 +197,7 @@ function ProtectionHub() {
 function ProgramsHub() {
   const [view, setView] = useState('summary'); const [list, , err, load] = useLoad(getPrograms);
   if (err) return <Err msg={err} retry={load} />;
-  if (view === 'detail') return (<><div className="backbar"><button className="linkbtn" onClick={() => setView('summary')}>Indietro</button></div><ProgramsInner /></>);
+  if (view === 'detail') return (<><div className="backbar"><BackButton onClick={() => setView('summary')} /></div><ProgramsInner /></>);
   const sized = (list || []).filter((x) => x.bytes > 0).sort((a, b) => b.bytes - a.bytes); const total = sized.reduce((x, y) => x + y.bytes, 0);
   return (<div className="screen"><h1 className="h1s">Programmi</h1><p className="sub">I programmi installati sul PC. Puoi disinstallarli e controllare gli avanzi che lasciano.</p>
     {!list ? <div role="status" aria-live="polite"><p className="sub">Leggo i programmi installati…</p><Rows /></div> : <div className="summary">
@@ -241,7 +241,7 @@ function SpeedInner() {
         <section className="sumcard" aria-label="Programmi aperti pesanti"><div className="sumtop"><div><h3>Programmi aperti pesanti</h3><p className="sumnum">{mem.length}</p></div><span className="fic" aria-hidden="true"><Layers size={22} /></span></div>
           <div className="sumact"><Button aria-label="Rivedi programmi aperti" onClick={() => setView('detail')}>Rivedi</Button></div></section>
       </div></div>}</div>);
-  return (<div className="screen"><h1 className="h1s">Velocità</h1><p className="sub">Questi programmi partono insieme al PC. Spegni quelli che non ti servono subito. <button className="linkbtn" onClick={() => setView('summary')}>Indietro</button></p>
+  return (<div className="screen"><div className="backbar"><BackButton onClick={() => setView('summary')} /></div><h1 className="h1s">Velocità</h1><p className="sub">Questi programmi partono insieme al PC. Spegni quelli che non ti servono subito.</p>
     <MemoryPanel />
     <h2>Programmi all'avvio</h2>
     {!apps ? <Rows /> : <ul className="list">{apps.map((a) => (
@@ -288,7 +288,7 @@ const BUB = ['var(--color-accent)', 'var(--color-accent-cyan)', 'var(--color-acc
 function packBubbles(items) {
   const maxB = Math.max(...items.map((i) => i.bytes), 1), placed = [];
   for (const it of [...items].sort((x, y) => y.bytes - x.bytes)) {
-    const r = Math.max(14, Math.sqrt(it.bytes / maxB) * 100); let best = null;
+    const r = Math.max(34, Math.sqrt(it.bytes / maxB) * 100); let best = null;
     if (!placed.length) best = { x: 0, y: 0 };
     else for (const q of placed) for (let g = 0; g < 360; g += 9) {
       const x = q.x + Math.cos(g * Math.PI / 180) * (q.r + r + 6), y = q.y + Math.sin(g * Math.PI / 180) * (q.r + r + 6);
@@ -325,9 +325,9 @@ function DiskInner() {
   const open = (f) => { if (!f.leaf) setPath([...path, f.name]); setHover(null); };
   return (<div className="screen"><h1 className="h1s">Mappa del disco</h1><p className="sub">Dove va lo spazio del tuo PC. Clicca una cartella per vedere cosa contiene. Solo lettura: qui non si elimina nulla.</p>
     {!d ? <Rows /> : <>
-      <nav className="crumbs" aria-label="Percorso"><button className="crumbback" aria-label="Indietro" disabled={top} onClick={() => setPath(path.slice(0, -1))}>‹</button>
+      <div role="navigation" className="crumbs" aria-label="Percorso"><BackButton disabled={top} onClick={() => setPath(path.slice(0, -1))} />
         <button className="linkbtn" aria-current={top ? 'page' : undefined} onClick={() => setPath([])}>Questo PC</button>
-        {path.map((n, i) => <React.Fragment key={i}><span aria-hidden="true">›</span>{i === path.length - 1 ? <span className="here" aria-current="page">{crumb(n, i)}</span> : <button className="linkbtn" onClick={() => setPath(path.slice(0, i + 1))}>{crumb(n, i)}</button>}</React.Fragment>)}</nav>
+        {path.map((n, i) => <React.Fragment key={i}><span aria-hidden="true">›</span>{i === path.length - 1 ? <span className="here" aria-current="page">{crumb(n, i)}</span> : <button className="linkbtn" onClick={() => setPath(path.slice(0, i + 1))}>{crumb(n, i)}</button>}</React.Fragment>)}</div>
       <div className="space">
         <section className="panel" aria-label="Le tue cartelle"><h2>{top ? 'Le tue cartelle' : crumb(path[path.length - 1], path.length - 1)}</h2>
           <p className="sub tight">{ready ? `${fmtBytes(sum)}${items.filter((f) => !f.leaf).length ? ` in ${items.filter((f) => !f.leaf).length} ${items.filter((f) => !f.leaf).length === 1 ? 'cartella' : 'cartelle'}` : ''}` : 'Calcolo le dimensioni…'}{sub && sub.partial ? ' · dimensioni parziali: la cartella è molto grande' : ''}</p>
@@ -336,7 +336,9 @@ function DiskInner() {
               : <button className={'frow' + (hover === f.name ? ' on' : '')} aria-label={`Apri ${nm(f)}, ${fmtBytes(f.bytes)}`} onClick={() => open(f)} onMouseEnter={() => setHover(f.name)} onMouseLeave={() => setHover(null)} onFocus={() => setHover(f.name)} onBlur={() => setHover(null)}><span className="grow">{nm(f)}</span><small>{sum ? Math.round(f.bytes / sum * 100) : 0}%</small><span className="mono">{fmtBytes(f.bytes)}</span><span aria-hidden="true">›</span></button>}</li>)}</ul>}</section>
         <section className="panel bubmap" aria-label="Mappa delle cartelle">{map && <svg viewBox={map.box.join(' ')} role="img" aria-label={`Mappa a bolle: ${items.map((f) => `${nm(f)} ${fmtBytes(f.bytes)}`).join(', ')}`}>
           {map.placed.map((o, i) => <g key={o.name} className={'bub' + (hover === o.name ? ' on' : '') + (o.leaf ? ' leaf' : '')} onClick={() => open(o)} onMouseEnter={() => setHover(o.name)} onMouseLeave={() => setHover(null)}><circle cx={o.x} cy={o.y} r={o.r} fill={BUB[i % BUB.length]} />
-            {o.r > 34 && <><text x={o.x} y={o.y - 2} textAnchor="middle" fontSize={Math.min(16, o.r / 3.2)}>{nm(o)}</text><text x={o.x} y={o.y + Math.min(16, o.r / 3.2) + 2} textAnchor="middle" fontSize={Math.min(14, o.r / 3.6)}>{fmtBytes(o.bytes)}</text></>}</g>)}</svg>}</section>
+            <title>{`${nm(o)}, ${fmtBytes(o.bytes)}`}</title>
+            {(() => { const big = o.r > 40, fs = big ? Math.min(16, o.r / 3.2) : 9.5, max = Math.max(3, Math.floor(o.r * 1.8 / (fs * .6))), n = nm(o), t = n.length > max ? n.slice(0, max - 1) + '…' : n;
+              return <><text x={o.x} y={big ? o.y - 2 : o.y + fs / 3} textAnchor="middle" fontSize={fs}>{t}</text>{big && <text x={o.x} y={o.y + fs + 2} textAnchor="middle" fontSize={Math.min(14, o.r / 3.6)}>{fmtBytes(o.bytes)}</text>}</>; })()}</g>)}</svg>}</section>
       </div>
       <div className="drives">{d.drives.map((v) => { const used = v.total - v.free, pct = Math.round(used / v.total * 100), hot = used / v.total > .9; return (
         <div className="drive" key={v.letter} role="group" aria-label={`Disco ${v.letter} ${fmtBytes(used)} usati su ${fmtBytes(v.total)}, ${pct}%`}>
@@ -349,7 +351,7 @@ function DiskInner() {
 function DisordineHub({ first }) {
   const [view, setView] = useState('summary'); const [files, , e1, l1] = useLoad(getLargeFiles); const [groups, , e2, l2] = useLoad(getDuplicates);
   if (e1 || e2) return <Err msg={e1 || e2} retry={() => { l1(); l2(); }} />;
-  if (view !== 'summary') return (<><div className="backbar"><button className="linkbtn" onClick={() => setView('summary')}>Indietro</button></div>{view === 'large' ? <LargeFilesInner /> : <DuplicatesInner />}</>);
+  if (view !== 'summary') return (<><div className="backbar"><BackButton onClick={() => setView('summary')} /></div>{view === 'large' ? <LargeFilesInner /> : <DuplicatesInner />}</>);
   const nLarge = (files || []).length, bLarge = (files || []).reduce((x, f) => x + f.bytes, 0);
   const copies = (groups || []).flatMap((g) => g.files.filter((f) => !f.keep).map(() => g.bytes)); const nDup = copies.length, bDup = copies.reduce((x, y) => x + y, 0);
   return (<div className="screen"><h1 className="h1s">Caos</h1><p className="sub">I file che pesano di più e le copie identiche. Vanno nel Cestino, quindi puoi sempre recuperarli.</p>

@@ -46,6 +46,8 @@ test('la classica ha il suo modo di tornare indietro: pulsante e scorciatoia, ne
   assert.ok(js.includes("location.assign('../')"), 'nel browser apre la pagina principale');
   assert.ok(js.includes('Torna alla versione recente') && js.includes('bibo-back-to-recent'), 'pulsante con nome accessibile');
   assert.ok(/if \(!window\.bibo\) addEventListener\('keydown'/.test(js), "la scorciatoia nel browser non raddoppia quella dell'app");
+  assert.ok(js.includes('bibo-version-section') && js.includes('Applica e riapri'), 'voce Versione dentro Impostazioni della classica');
+  assert.ok(js.includes("h2.h2s.sect"), 'si aggancia al titolo Impostazioni della 0.1.27');
 });
 test('il processo principale e il preload espongono la scelta della versione', () => {
   const main = fs.readFileSync(path.join(root, 'electron', 'main.cjs'), 'utf8'), pre = fs.readFileSync(path.join(root, 'electron', 'preload.cjs'), 'utf8');

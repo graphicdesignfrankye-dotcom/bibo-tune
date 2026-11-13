@@ -183,13 +183,13 @@ main:focus-visible{outline-offset:-4px;border-radius:var(--radius-lg)}
 .sumlist li{display:flex;gap:var(--space-3);justify-content:space-between}
 .sumcard.tall{grid-row:span 2}
 /* Spazio: elenco a sinistra, mappa a bolle a destra, dischi in basso */
-.space{display:grid;grid-template-columns:minmax(260px,1fr) 1.3fr;gap:var(--space-4);align-items:stretch}
+.space{display:grid;grid-template-columns:minmax(260px,1fr) 1.3fr;gap:var(--space-4);align-items:start}
 .panel{border:1px solid var(--glass-border);border-radius:var(--radius-lg);background:var(--glass-bg);padding:var(--space-4);display:flex;flex-direction:column;gap:var(--space-3);min-width:0}
 .flist{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:2px}
 .frow{all:unset;box-sizing:border-box;cursor:pointer;display:flex;align-items:center;gap:var(--space-3);width:100%;padding:10px 12px;border-radius:var(--radius-md);font:600 14px var(--font-sans);color:var(--color-text);border:1px solid transparent}
 .frow:hover{background:var(--color-surface-raised)}.frow.on{background:var(--color-surface-raised);border-color:var(--color-accent)}
 .frow small{color:var(--color-text-muted);font-weight:400}.frow:focus-visible{outline:2px solid var(--color-accent-cyan);outline-offset:2px}
-.bubmap{align-items:center;justify-content:center;min-height:340px}.bubmap svg{width:100%;height:auto;max-height:460px}
+.bubmap{align-items:center;justify-content:center;height:420px;position:sticky;top:0}.bubmap svg{width:100%;height:auto;max-height:460px}
 .bub{cursor:pointer}.bub circle{opacity:.92;stroke:transparent;stroke-width:3}.bub.on circle{stroke:var(--color-text)}
 .bub text{fill:var(--color-on-accent);font-family:var(--font-sans);font-weight:700;pointer-events:none}
 .drives{display:flex;flex-direction:column;gap:var(--space-3)}
@@ -251,3 +251,10 @@ main:focus-visible{outline-offset:-4px;border-radius:var(--radius-lg)}
 .vopt .vpt{color:var(--color-text-muted);font-size:14px;line-height:21px;padding-left:14px;position:relative}.vopt .vpt::before{content:"•";position:absolute;left:2px}
 .reminder kbd{display:inline-block;border:1px solid var(--glass-border);border-bottom-width:2px;border-radius:6px;padding:0 7px;font:600 13px/20px var(--font-sans);background:var(--color-surface-raised)}
 @media (max-width:700px){.verchoice{grid-template-columns:1fr}}
+
+/* Tasto Indietro uguale in tutta l'app */
+.backpill{all:unset;cursor:pointer;display:inline-flex;align-items:center;gap:6px;min-height:32px;padding:0 var(--space-3) 0 var(--space-2);border-radius:999px;background:var(--color-surface-raised);color:var(--color-text);font:600 14px var(--font-sans)}
+.backpill:hover{background:var(--color-surface-hover,var(--color-surface-raised));filter:brightness(1.05)}
+.backpill:disabled{opacity:.4;cursor:default}
+.backpill:focus-visible{outline:2px solid var(--color-accent-cyan);outline-offset:2px}
+.backpill span{font-size:20px;line-height:1;margin-top:-2px}

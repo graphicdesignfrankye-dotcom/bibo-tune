@@ -4,7 +4,7 @@ App per Windows che mette a punto il PC con l'aiuto del robot Bibo: toglie i fil
 
 È fatta con Electron e React. Su Windows lavora sul PC vero; su Mac e Linux, e nel browser, mostra dati di esempio, così si può sviluppare e provare l'interfaccia senza toccare niente.
 
-> **Stato:** versione 0.1.41, provata su Windows fino alla 0.1.27 e in parte oltre. L'installer non è firmato: al primo avvio Windows (SmartScreen, Smart App Control) può mostrare un avviso.
+> **Stato:** versione 0.1.48, provata su Windows fino alla 0.1.27 e in parte oltre. L'installer non è firmato: al primo avvio Windows (SmartScreen, Smart App Control) può mostrare un avviso.
 
 ## Cosa fa
 
@@ -56,7 +56,7 @@ Le operazioni su Windows (registro, Cestino, Defender, winget) non si possono pr
 npm run dist:win
 ```
 
-Produce `release/Bibo Tune-<versione>-win-x64.exe` (NSIS, x64) e il relativo `.blockmap`. Si può generare anche da Mac: electron-builder scarica da solo gli strumenti che servono. L'installer non è firmato (nessun certificato configurato).
+Produce `release/Bibo Tune-<versione>-win-x64.exe` (NSIS, x64) e il relativo `.blockmap`. Si può generare anche da Mac: electron-builder scarica da solo gli strumenti che servono. L'installer non è firmato (nessun certificato configurato). All'avvio chiede se installare il programma o usarlo in versione portatile (solo i file in una cartella, senza collegamenti né disinstallatore): lo script è `build/installer.nsh`.
 
 A ogni installer nuovo si alza `version` in `package.json`: il numero compare in Impostazioni e nel nome del file.
 

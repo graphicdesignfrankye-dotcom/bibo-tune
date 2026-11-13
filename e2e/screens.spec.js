@@ -208,6 +208,9 @@ test('S-Mappa del disco: cliccando una cartella (elenco o bolla) si apre il suo 
   await page.getByRole('button', { name: /^Apri Dati delle app/ }).click(); // dall'elenco
   await expect(page.getByRole('navigation', { name: 'Percorso' }).getByText('Dati delle app')).toBeVisible();
   await expect(page.getByRole('button', { name: /^Apri Chrome/ })).toBeVisible();
+  await expect(page.getByRole('img', { name: /Mappa a bolle: .*Chrome/ })).toBeVisible(); // le bolle mostrano il contenuto della cartella aperta
+  await expect(page.getByRole('img', { name: /Mappa a bolle: .*Video/ })).toHaveCount(0);
+  const bar = await page.getByRole('navigation', { name: 'Percorso' }).boundingBox(); expect(bar.height).toBeLessThan(80); // una riga sola: non deve prendere gli stili della barra laterale
   await page.getByRole('button', { name: /^Apri Chrome/ }).click(); // secondo livello
   await expect(page.getByRole('navigation', { name: 'Percorso' }).getByText('Chrome')).toBeVisible();
   expect(await axe(page)).toEqual([]);
@@ -271,6 +274,21 @@ test('S-Versione: dalla classica si torna alla recente anche con Ctrl+Maiusc+V (
   const ok = guard(page); await page.goto('/classic/index.html'); await expect(page.getByRole('button', { name: 'Avvia messa a punto' })).toBeVisible();
   await expect(page.getByRole('button', { name: 'Torna alla versione recente' })).toBeVisible();
   await page.keyboard.press('Control+Shift+V');
+  await expect(page.getByRole('heading', { name: 'Messa a punto', level: 1 })).toBeVisible(); await expect(page).not.toHaveURL(/classic/); ok();
+});
+test('S-Versione: nella classica la voce Versione sta in Impostazioni e riporta alla recente', async ({ page }) => {
+  const ok = guard(page); await page.goto('/classic/index.html');
+  await page.getByRole('navigation', { name: 'Principale' }).getByRole('button', { name: 'Impostazioni', exact: true }).click();
+  const sec = page.getByRole('region', { name: 'Versione' }); await expect(sec).toBeVisible();
+  const grp = sec.getByRole('radiogroup', { name: 'Versione' });
+  const recent = grp.getByRole('radio', { name: /^Recente/ }), classic = grp.getByRole('radio', { name: /^Classica · 0\.1\.27/ });
+  await expect(classic).toHaveAttribute('aria-checked', 'true'); await expect(recent).toHaveAttribute('aria-checked', 'false');
+  const apply = sec.getByRole('button', { name: 'Applica e riapri' }); await expect(apply).toBeDisabled(); // la classica è già in uso
+  await page.getByRole('radio', { name: 'Chiaro' }).click(); // un cambio di tema ridisegna la pagina: la voce deve restare
+  await expect(page.getByRole('region', { name: 'Versione' })).toBeVisible();
+  await page.getByRole('region', { name: 'Versione' }).getByRole('radio', { name: /^Recente/ }).click();
+  await expect(page.getByRole('region', { name: 'Versione' }).getByRole('button', { name: 'Applica e riapri' })).toBeEnabled();
+  await page.getByRole('region', { name: 'Versione' }).getByRole('button', { name: 'Applica e riapri' }).click();
   await expect(page.getByRole('heading', { name: 'Messa a punto', level: 1 })).toBeVisible(); await expect(page).not.toHaveURL(/classic/); ok();
 });
 test('S-Versione: tornando all\'indirizzo normale si vede ancora la versione recente', async ({ page }) => {
@@ -388,4 +406,18 @@ test('S-Tema chiaro: tutte le schermate senza violazioni di contrasto WCAG AA', 
     await detail(page, nav); await page.waitForTimeout(600); expect(await axe(page), `contrasto nel tema chiaro nel dettaglio: ${nav}`).toEqual([]);
   }
   await page.goto('/#info'); await page.reload(); expect(await axe(page), 'contrasto nel tema chiaro: Informazioni').toEqual([]);
+});
+
+test('Tasto Indietro uguale ovunque: sopra il titolo, con Esc e Alt+Freccia sinistra', async ({ page }) => {
+  const ok = guard(page); await page.goto('/'); await page.getByRole('button', { name: 'Velocità', exact: true }).click(); await begin(page, 'Velocità');
+  for (const key of ['Escape', 'Alt+ArrowLeft']) {
+    await page.getByRole('button', { name: "Rivedi programmi all'avvio" }).click();
+    const back = page.getByRole('button', { name: 'Indietro' });
+    await expect(back).toHaveClass(/backpill/);
+    const [b, h] = await Promise.all([back.boundingBox(), page.getByRole('heading', { level: 1 }).boundingBox()]);
+    expect(b.y).toBeLessThan(h.y);
+    await page.keyboard.press(key);
+    await expect(page.getByRole('region', { name: 'Memoria' })).toBeVisible();
+  }
+  ok();
 });
