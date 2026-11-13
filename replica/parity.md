@@ -237,3 +237,7 @@ Prova dell'utente sulla 0.1.53: l'icona di barra delle applicazioni e area di no
 - **0.1.58:** i tasti del giro sporgevano dal riquadro: riquadro più largo (380 px) e tasti che vanno a capo; test che controlla che stiano dentro.
 - **Test:** 67 e2e (con 3 nuovi sul giro) e 43 di sistema verdi alla 0.1.57; dopo, rieseguiti solo i test del giro.
 - **Da verificare:** l'utente segnala che sul PC di prova il giro non è partito all'ultima prova, forse perché quel PC l'aveva già visto (la memoria locale lo segna come fatto). Da provare su un altro PC, dove deve comparire al primo avvio.
+
+### Esito della 0.1.58 su Windows (2026-11-14)
+Provata dall'utente sullo stesso PC delle prove precedenti. Dalle Impostazioni, **"Rivedi il giro" funziona** e i tasti del giro stanno dentro il riquadro: tutto a posto. Quindi il giro guidato e la correzione dei tasti sono verificati su Windows.
+Resta non verificato un solo punto: la comparsa **automatica al primo avvio** su un PC dove l'app non è mai stata aperta. Sul PC di prova non è partita da sola perché la memoria locale lo segna già come visto; il percorso è coperto dai test e2e (stato pulito: il giro compare, "Non visualizzare di nuovo" lo ferma), ma non è stato visto a mano su un PC nuovo.
