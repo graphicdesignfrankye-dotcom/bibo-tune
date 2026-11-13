@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Bibo Tune — Il tuo PC, rimesso a punto</title>
+<meta name="description" content="Bibo Tune toglie i file inutili, controlla l'avvio e le difese di Windows e disinstalla i programmi senza lasciare avanzi. Tutto sul tuo PC, niente in rete.">
+<meta property="og:type" content="website"><meta property="og:title" content="Bibo Tune — Il tuo PC, rimesso a punto"><meta property="og:description" content="Bibo toglie i file inutili, controlla l'avvio e le difese di Windows e disinstalla i programmi senza lasciare avanzi."><meta property="og:locale" content="it_IT"><meta name="theme-color" content="#08121A">
+<link rel="icon" href="favicon.svg"><link rel="stylesheet" href="tokens.css">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700;800&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:var(--color-bg-deep);color:var(--color-text);font:16px/1.6 'Plus Jakarta Sans',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0;z-index:-1;background:radial-gradient(900px 500px at 78% -5%,rgba(255,138,61,.20),transparent 60%),radial-gradient(900px 600px at 5% 8%,rgba(45,212,191,.16),transparent 60%),var(--color-bg-deep)}
+a{color:inherit}.wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+.skip{position:absolute;left:-999px}.skip:focus{left:12px;top:12px;background:#fff;color:#000;padding:8px 12px;border-radius:8px;z-index:50}
+header{position:sticky;top:0;z-index:20;backdrop-filter:blur(14px);background:rgba(8,18,26,.62);border-bottom:1px solid rgba(255,255,255,.07)}
+header .wrap{display:flex;align-items:center;gap:24px;height:64px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:800;text-decoration:none;font-size:18px}.brand img{width:34px;height:34px}.brand b{color:var(--color-accent)}
+nav{display:flex;gap:22px;margin-left:auto;font-weight:600;font-size:15px}nav a{text-decoration:none;color:var(--color-text-muted)}nav a:hover{color:var(--color-text)}
+.btn{display:inline-flex;align-items:center;gap:8px;min-height:46px;padding:0 22px;border-radius:999px;font:700 16px 'Plus Jakarta Sans',sans-serif;text-decoration:none;border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.06);color:var(--color-text);cursor:pointer}
+.btn.primary{background:linear-gradient(135deg,#0F7A70,#C2410C);border-color:transparent;box-shadow:0 10px 30px rgba(194,65,12,.28)}.btn:hover{filter:brightness(1.1)}.btn:focus-visible,a:focus-visible,button:focus-visible{outline:3px solid var(--color-accent-cyan);outline-offset:3px}
+header .btn{min-height:40px;padding:0 18px;font-size:15px}
+.hero{display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:center;padding:84px 0 56px}
+.pill{display:inline-flex;gap:8px;align-items:center;padding:6px 14px;border-radius:999px;background:rgba(45,212,191,.12);border:1px solid rgba(45,212,191,.3);font-size:14px;font-weight:600;color:#BFF5EE}
+h1{font-size:clamp(40px,6vw,66px);line-height:1.02;letter-spacing:-.03em;margin:18px 0 20px;font-weight:800}
+h1 em{font-style:normal;background:linear-gradient(135deg,#2DD4BF,#FF8A3D);-webkit-background-clip:text;background-clip:text;color:transparent}
+.lead{font-size:19px;color:var(--color-text-muted);max-width:520px;margin:0 0 28px}.cta{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:22px}
+.trust{display:flex;gap:10px 18px;flex-wrap:wrap;font-size:14px;color:var(--color-text-muted);padding:0;list-style:none;margin:0}.trust li::before{content:"✓ ";color:var(--color-accent)}
+.heroart{position:relative;display:grid;place-items:center;min-height:360px}.heroart img.face{width:min(380px,70%);filter:drop-shadow(0 30px 50px rgba(0,0,0,.45));animation:float 5s ease-in-out infinite}
+.chip{position:absolute;padding:10px 16px;border-radius:16px;background:rgba(22,40,50,.82);border:1px solid rgba(255,255,255,.12);backdrop-filter:blur(10px);font-weight:700;font-size:14px;box-shadow:0 14px 30px rgba(0,0,0,.35)}.chip small{display:block;font-weight:500;color:var(--color-text-muted)}
+.c1{left:0;top:18%}.c2{right:-4px;top:44%}.c3{left:8%;bottom:6%}
+@keyframes float{50%{transform:translateY(-12px)}}@media(prefers-reduced-motion:reduce){.heroart img.face{animation:none}html{scroll-behavior:auto}}
+section{padding:72px 0}.eyebrow{font-size:13px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:var(--color-accent)}
+h2{font-size:clamp(30px,4.4vw,46px);line-height:1.1;letter-spacing:-.02em;margin:10px 0 14px;font-weight:800}.sub{color:var(--color-text-muted);max-width:620px;font-size:18px;margin:0}
+.demo{margin-top:34px;border-radius:26px;border:1px solid rgba(255,255,255,.12);background:rgba(22,40,50,.55);padding:18px;box-shadow:0 40px 80px rgba(0,0,0,.4)}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}.tabs button{font:600 15px 'Plus Jakarta Sans',sans-serif;padding:8px 16px;border-radius:999px;border:1px solid rgba(255,255,255,.14);background:transparent;color:var(--color-text-muted);cursor:pointer}
+.tabs button[aria-selected=true]{background:var(--color-surface-raised);color:var(--color-text);border-color:var(--color-accent)}
+.shot{border-radius:16px;overflow:hidden;border:1px solid rgba(255,255,255,.1)}.shot img{display:block;width:100%;height:auto}
+.note{font-size:14px;color:var(--color-text-muted);margin:14px 4px 0}
+.grid{display:grid;gap:18px;margin-top:34px;grid-template-columns:repeat(3,1fr)}.grid.two{grid-template-columns:repeat(2,1fr)}.grid.four{grid-template-columns:repeat(4,1fr)}
+.card{padding:26px;border-radius:22px;background:rgba(22,40,50,.6);border:1px solid rgba(255,255,255,.1)}.card h3{margin:14px 0 8px;font-size:20px}.card p{margin:0;color:var(--color-text-muted);font-size:16px}
+.ico{width:46px;height:46px;border-radius:14px;display:grid;place-items:center;font-size:22px;background:linear-gradient(135deg,rgba(45,212,191,.25),rgba(255,138,61,.25))}
+.dl{display:grid;grid-template-columns:1.2fr .8fr;gap:22px;margin-top:34px}.dl .card.big{background:linear-gradient(160deg,rgba(15,122,112,.35),rgba(22,40,50,.75))}
+.meta{display:flex;gap:8px 16px;flex-wrap:wrap;color:var(--color-text-muted);font-size:14px;margin:12px 0 20px;padding:0;list-style:none}
+.warn{border-left:3px solid var(--color-warning);padding:10px 14px;background:rgba(251,191,36,.08);border-radius:0 12px 12px 0;font-size:14px;color:#F3DDA0;margin-top:18px}
+.steps{counter-reset:s;display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:34px;padding:0;list-style:none}.steps li{counter-increment:s;padding:26px;border-radius:22px;border:1px solid rgba(255,255,255,.1);background:rgba(22,40,50,.5)}
+.steps li::before{content:"0" counter(s);display:block;font-weight:800;font-size:34px;background:linear-gradient(135deg,#2DD4BF,#FF8A3D);-webkit-background-clip:text;background-clip:text;color:transparent}.steps b{display:block;margin:6px 0}.steps span{color:var(--color-text-muted)}
+details{border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:16px 20px;background:rgba(22,40,50,.45);margin-top:12px}summary{cursor:pointer;font-weight:700}details p{color:var(--color-text-muted);margin:10px 0 0}
+footer{padding:44px 0 60px;border-top:1px solid rgba(255,255,255,.08);color:var(--color-text-muted);font-size:14px}footer .wrap{display:flex;gap:18px 32px;flex-wrap:wrap;align-items:center;justify-content:space-between}
+@media(max-width:900px){.hero,.dl{grid-template-columns:1fr}.grid,.grid.four{grid-template-columns:1fr 1fr}.steps{grid-template-columns:1fr}nav{display:none}header .btn{margin-left:auto}.heroart{min-height:280px}}
+@media(max-width:560px){.grid,.grid.two,.grid.four{grid-template-columns:1fr}.hero{padding-top:44px}.chip{display:none}}
+</style></head>
+<body>
+<a class="skip" href="#main">Vai al contenuto</a>
+<header><div class="wrap"><a class="brand" href="#"><img src="img/bibo.svg" alt="">Bibo <b>Tune</b></a>
+<nav aria-label="Principale"><a href="#demo">Anteprima</a><a href="#novita">Novità</a><a href="#funzioni">Funzioni</a><a href="#scarica">Scarica</a><a href="#aiuto">Aiuto</a></nav>
+<a class="btn primary" href="#scarica">Scarica</a></div></header>
+<main id="main"><div class="wrap">
+<div class="hero"><div>
+ <span class="pill">● Novità 0.1.58 · Giro guidato e icone che seguono il tema</span>
+ <h1>Il tuo PC,<br><em>rimesso a punto.</em></h1>
+ <p class="lead">Bibo toglie i file inutili, ti fa vedere cosa rallenta l'avvio, controlla le difese di Windows e disinstalla i programmi senza lasciare avanzi.</p>
+ <div class="cta"><a class="btn primary" href="#scarica">⬇ Scarica per Windows</a><a class="btn" href="#demo">Guarda l'anteprima ↓</a></div>
+ <ul class="trust"><li>Tutto sul tuo PC</li><li>Nessun account</li><li>Niente inviato in rete</li></ul></div>
+ <div class="heroart"><img class="face" src="img/bibo.svg" alt="Bibo, il robot di Bibo Tune">
+  <div class="chip c1">Puoi liberare<small>18,4 GB</small></div><div class="chip c2">Avvio più rapido<small>3 programmi in meno</small></div><div class="chip c3">Difese attive<small>Firewall e antivirus ok</small></div></div></div>
+<section id="demo" aria-labelledby="t-demo"><span class="eyebrow">Anteprima</span><h2 id="t-demo">Guarda com'è fatto dentro.</h2><p class="sub">Le stesse schermate dell'app, con dati di esempio.</p>
+ <div class="demo"><div class="tabs" role="tablist" aria-label="Schermate"><button role="tab" aria-selected="true" data-i="panoramica">Panoramica</button><button role="tab" aria-selected="false" data-i="pulizia">Pulizia</button><button role="tab" aria-selected="false" data-i="velocita">Velocità</button><button role="tab" aria-selected="false" data-i="mappa-del-disco">Mappa del disco</button></div>
+ <div class="shot"><img id="shot" src="img/panoramica.jpg" alt="Schermata di Bibo Tune: Panoramica"></div>
+ <p class="note">Dati di esempio: questa anteprima non legge il tuo PC.</p></div></section>
+<section id="novita" aria-labelledby="t-nov"><span class="eyebrow">Novità · Bibo Tune 0.1.58</span><h2 id="t-nov">Più comodo fin dal primo minuto.</h2>
+ <div class="grid four"><div class="card"><div class="ico">🧭</div><h3>Giro guidato</h3><p>Al primo avvio Bibo ti mostra dove sta ogni cosa, in mezzo minuto. Si può rivedere quando vuoi.</p></div>
+ <div class="card"><div class="ico">🌗</div><h3>Icone in base al tema</h3><p>Barra, area di notifica e collegamenti cambiano con il tema chiaro o scuro.</p></div>
+ <div class="card"><div class="ico">🫧</div><h3>Mappa a bolle</h3><p>Ogni bolla ha il suo nome e segue la cartella che stai guardando.</p></div>
+ <div class="card"><div class="ico">💾</div><h3>Installata o portatile</h3><p>Scegli subito se installarlo o copiarlo in una cartella, senza lasciare tracce.</p></div></div></section>
+<section id="funzioni" aria-labelledby="t-fun"><span class="eyebrow">Cosa fa</span><h2 id="t-fun">Poche cose, fatte con cura.</h2><p class="sub">Prima di toccare qualcosa Bibo ti mostra l'elenco, e scegli tu.</p>
+ <div class="grid"><div class="card"><div class="ico">✨</div><h3>Pulizia</h3><p>File temporanei, cache dei browser, vecchi aggiornamenti e Cestino, anche un elemento alla volta.</p></div>
+ <div class="card"><div class="ico">⚡</div><h3>Velocità</h3><p>I programmi che partono con Windows, con il loro peso, e la memoria da liberare.</p></div>
+ <div class="card"><div class="ico">🛡️</div><h3>Protezione</h3><p>Firewall, antivirus e aggiornamenti, con una scansione rapida di Microsoft Defender.</p></div>
+ <div class="card"><div class="ico">🧩</div><h3>Programmi</h3><p>Disinstalla e cerca gli avanzi di cartelle e registro, con una copia di sicurezza prima di cancellare.</p></div>
+ <div class="card"><div class="ico">🗂️</div><h3>Caos</h3><p>File grandi e doppioni, che vanno nel Cestino: puoi sempre recuperarli.</p></div>
+ <div class="card"><div class="ico">🔒</div><h3>Privacy</h3><p>Cronologia e cookie dei browser, senza toccare segnalibri e password.</p></div></div></section>
+<section id="scarica" aria-labelledby="t-dl"><span class="eyebrow">Scarica</span><h2 id="t-dl">Un solo file, pronto in un minuto.</h2>
+ <div class="dl"><div class="card big"><h3 style="margin-top:0;font-size:24px">Bibo Tune per Windows</h3>
+  <ul class="meta"><li>Versione 0.1.58</li><li>Windows 10 / 11 · x64</li><li>Installer EXE · 118 MB</li></ul>
+  <a class="btn primary" href="#">⬇ Scarica per Windows</a>
+  <p class="warn"><b>Installer non firmato.</b> Al primo avvio Windows può mostrare un avviso (SmartScreen): premi «Maggiori informazioni» e poi «Esegui comunque». Puoi controllare il file con la somma SHA-256 pubblicata accanto al download.</p></div>
+  <div class="card"><h3 style="margin-top:0">Installata o portatile</h3><p>All'avvio dell'installer scegli: <b>Installata</b>, con collegamenti e disinstallazione da Windows, oppure <b>Portatile</b>, solo i file in una cartella (utile per una chiavetta).</p><p style="margin-top:12px">macOS e Linux: non previsti.</p></div></div>
+ <ol class="steps"><li><b>Scarica l'installer</b><span>Un file solo, da avviare con un doppio clic.</span></li><li><b>Scegli come usarlo</b><span>Installata o portatile, poi la cartella che preferisci.</span></li><li><b>Fai il giro con Bibo</b><span>Mezzo minuto per vedere dove sta ogni cosa, poi premi Scansiona.</span></li></ol></section>
+<section id="aiuto" aria-labelledby="t-faq"><span class="eyebrow">Domande</span><h2 id="t-faq">Un po' di aiuto, quando serve.</h2>
+ <details><summary>Bibo Tune manda dati da qualche parte?</summary><p>No. Tutto avviene sul tuo PC: l'app non invia nulla in rete e non chiede un account.</p></details>
+ <details><summary>È sicuro cancellare quello che trova?</summary><p>Prima di eliminare vedi l'elenco e scegli. I file vanno nel Cestino quando possibile, e prima di toccare il registro salva una copia <code>.reg</code>.</p></details>
+ <details><summary>Perché Windows mostra un avviso all'avvio?</summary><p>L'installer non è ancora firmato digitalmente. L'avviso è normale per i programmi nuovi e non firmati: puoi proseguire con «Maggiori informazioni» e «Esegui comunque».</p></details>
+ <details><summary>Come lo disinstallo?</summary><p>Dall'elenco delle app di Windows, se l'hai installato. Se hai scelto la versione portatile basta cancellare la sua cartella.</p></details></section>
+</div></main>
+<footer><div class="wrap"><a class="brand" href="#"><img src="img/bibo.svg" alt="">Bibo <b>Tune</b></a><span>© 2026 Francesco Argento · Tutti i diritti riservati</span><span>Le schermate usano dati di esempio.</span></div></footer>
+<script>
+var shot=document.getElementById('shot'),tabs=document.querySelectorAll('[role=tab]');
+tabs.forEach(function(t){t.addEventListener('click',function(){tabs.forEach(function(x){x.setAttribute('aria-selected',x===t)});shot.src="img/"+t.dataset.i+".jpg";shot.alt='Schermata di Bibo Tune: '+t.textContent})});
+</script></body></html>
