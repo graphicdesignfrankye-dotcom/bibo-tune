@@ -6,6 +6,8 @@ App per Windows che mette a punto il PC con l'aiuto del robot Bibo: toglie i fil
 
 > **Stato:** versione 0.1.58, provata su Windows fino alla 0.1.27 e in parte oltre. L'installer non è firmato: al primo avvio Windows (SmartScreen, Smart App Control) può mostrare un avviso.
 
+**Sito:** [bibotune.vercel.app](https://bibotune.vercel.app) · **Demo nel browser** (dati di esempio): [bibo-tune.vercel.app](https://bibo-tune.vercel.app)
+
 ## Cosa fa
 
 | Sezione | Cosa si può fare |
@@ -85,4 +87,4 @@ build/  assets/  icone
 
 - Le immagini di confronto usate durante lo sviluppo non fanno parte del repository.
 - Licenza: il codice è sotto licenza MIT, vedi [LICENSE](LICENSE). Il nome «Bibo Tune» e la grafica di Bibo restano riservati: vedi [TRADEMARK.md](TRADEMARK.md).
-- Gli installer si scaricano dalle [release](../../releases) o dal [sito](https://bibo-tune-site.vercel.app).
+- Gli installer si scaricano dalle [release](../../releases) o dal [sito](https://bibotune.vercel.app).
